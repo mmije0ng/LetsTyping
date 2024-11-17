@@ -1,11 +1,15 @@
-// src/App.js
 import React, { useState } from 'react';
-import TypingResult from './components/result/TypingResult';
-import { ChakraProvider } from '@chakra-ui/react';
-import { Route, Routes, Navigate } from 'react-router-dom';
+import GlobalStyle from './styles/globalstyles';
+import RootLayout from './layouts/root-layout';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
-function App() {
-  const [isModalOpen, setIsModalOpen] = useState(true);
+import { ChakraProvider } from '@chakra-ui/react';
+
+import Home from './pages/home';
+import TypingResult from './pages/TypingResult'; // 타이핑 결과 컴포넌트
+
+const App = () => {
+  const [isModalOpen, setIsModalOpen] = useState(true); // 모달 상태 관리
 
   const data = {
     time: '1분 27초',
@@ -27,17 +31,46 @@ function App() {
 
   const closeModal = () => setIsModalOpen(false);
 
+  const router = createBrowserRouter([
+    {
+      path: '/',
+      element: <RootLayout />,
+      children: [
+        {
+          index: true,
+          element: <Home />,
+        },
+        {
+          path: 'upload',
+          element: <Home />, // 업로드 컴포넌트 삽입
+        },
+        {
+          path: 'typing',
+          element: <Home />, // 타이핑 컴포넌트 삽입
+        },
+        {
+          path: 'result',
+          element: (
+            <>
+              <Home /> {/* Home 컴포넌트와 함께 TypingResult 표시 */}
+              <TypingResult isOpen={isModalOpen} onClose={closeModal} data={data} />
+            </>
+          ),
+        },
+        {
+          path: 'ranking',
+          element: <Home />, // 랭킹 컴포넌트 삽입
+        },
+      ],
+    },
+  ]);
+
   return (
-    <ChakraProvider>
-      <Routes>
-        { /*일단 타이핑 페이지에 타이핑 결과 모달이 랜더링 되도록*/}
-        <Route
-          path="/typing"
-          element={<TypingResult isOpen={isModalOpen} onClose={closeModal} data={data} />}
-        />
-      </Routes>
+    <ChakraProvider> {/* Chakra UI 스타일 적용 */} 
+      <GlobalStyle />
+      <RouterProvider router={router} />
     </ChakraProvider>
   );
-}
+};
 
 export default App;
