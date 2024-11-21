@@ -1,35 +1,27 @@
 // src/components/TypingResult.js
-// 타이핑 결과 
+// 타이핑 결과 모달
 
 import React, { useState } from 'react';
-import ResultModal from '../components/result/ResultModal';
+import ResultModal from './ResultModal';
 import { Box, Button } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
-import ResultDetailList from '../components/result/ResultDetailList';
-import TypingResultCat from '../components/result/TypingResultCat';
-import TypingKeywordList from '../components/result/TypingKeywordList';
-import TypingResultKeyboard from '../components/result/TypingResultKeyboard';
-import RankButton from '../components/result/RankButton';
+import ResultDetailList from './ResultDetailList';
+import TypingResultCat from './TypingResultCat';
+import TypingKeywordList from './TypingKeywordList';
+import TypingResultKeyboard from './TypingResultKeyboard';
+import RankButton from './RankButton';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLink, faRedo } from '@fortawesome/free-solid-svg-icons';
 import styled from 'styled-components';
-
-const ModalContentContainer = styled(Box)`
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    gap: 20px;
-    width: 100%;
-    height: auto;
-    margin-top: 20px;
-`;
+import { ModalContentContainer } from '../../styles/result/typingResultStyles'; // 스타일 import
 
 const TypingResult = ({ isOpen, onClose, data }) => {
     const navigate = useNavigate();
-    const [isKorean, setIsKorean] = useState(true); // 한글/영어 상태 관리
+    const [isKorean, setIsKorean] = useState(data.isKorean); // 한글 영어 상태 관리
+    console.log(`TypingResult 모달 열림 여부 isOpen: ${isOpen}`)
 
     const goToRankPage = () => {
-        navigate('/rank');
+        navigate('/ranking');
     };
 
     // 한글/영어 키보드 전환 함수
@@ -77,12 +69,12 @@ const TypingResult = ({ isOpen, onClose, data }) => {
         </ModalContentContainer>
 
         {/* 하단: 가상 키보드 */}
-        <Box mt="20" width="100%">
-            <TypingResultKeyboard highlightKeys={data.highlightKeys} isKorean={isKorean} toggleKoreanLayout={toggleKoreanLayout} />
+        <Box mt="60px" width="100%">
+            <TypingResultKeyboard mistakeKeys={data.mistakeKeys} isKorean={isKorean} toggleKoreanLayout={toggleKoreanLayout} />
         </Box>
 
         {/* Rank 버튼 */}
-        <Box display="flex" justifyContent="flex-end" mt="10">
+        <Box display="flex" justifyContent="flex-end" mt="20px">
             <RankButton onClick={goToRankPage} />
         </Box>
         </ResultModal>

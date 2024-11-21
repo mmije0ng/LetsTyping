@@ -1,4 +1,4 @@
-// src/components/Item.js
+// src/components/ResultDetail.js
 // 타이핑 결과 - 시간, 타수, 정확도 항목을 나타내는 개별 컴포넌트
 
 import React from 'react';

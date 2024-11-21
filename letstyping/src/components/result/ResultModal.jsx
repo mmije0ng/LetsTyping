@@ -11,7 +11,9 @@ import {
   ModalBody,
 } from '@chakra-ui/react';
 
-const ResultModal = ({ isOpen = false, onClose, title = "", children }) => {
+const ResultModal = ({ isOpen, onClose, title = "", children }) => {
+  console.log(`ResultModal isOpen: ${isOpen}`); // 상태 확인
+
   return (
     <Modal isOpen={isOpen} onClose={onClose} size="xl" isCentered>
       <ModalOverlay bg="rgba(0, 0, 0, 0.2)" />
@@ -19,7 +21,7 @@ const ResultModal = ({ isOpen = false, onClose, title = "", children }) => {
         position="relative"
         width={['90%', '80%', '70%', '955px']}
         maxWidth="1114px"
-        height="750px"  
+        height="659px"  
         background="#FFFFFF"
         boxShadow="0px 10px 30px rgba(0, 0, 0, 0.25)"
         borderRadius="8px"

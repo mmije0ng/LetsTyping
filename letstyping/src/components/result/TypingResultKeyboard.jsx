@@ -1,10 +1,12 @@
 // src/components/TypingResultKeyboard.js
+// 타이핑 결과 - 타이핑 키보드 화면 (세세한 부분 수정 필요)
+
 import React, { useState } from "react";
 import Keyboard from "react-simple-keyboard";
 import "react-simple-keyboard/build/css/index.css";
 import styled from "styled-components";
 
-const TypingResultKeyboard = ({ highlightKeys, isKorean, toggleKoreanLayout }) => {
+const TypingResultKeyboard = ({ mistakeKeys, isKorean, toggleKoreanLayout }) => {
   const [layoutName, setLayoutName] = useState("default");
 
   // 각 키의 색상을 결정하는 함수
@@ -16,8 +18,8 @@ const TypingResultKeyboard = ({ highlightKeys, isKorean, toggleKoreanLayout }) =
   };
 
   // buttonTheme 배열을 생성하여 특정 키에 스타일을 적용
-  const buttonTheme = Object.keys(highlightKeys).flatMap((key) => {
-    const colorClass = getKeyColorClass(highlightKeys[key]);
+  const buttonTheme = Object.keys(mistakeKeys).flatMap((key) => {
+    const colorClass = getKeyColorClass(mistakeKeys[key]);
     if (/^[a-zA-Z]$/.test(key)) { // 영어 알파벳인지 확인
       return [
         { class: colorClass, buttons: key.toLowerCase() },
@@ -57,22 +59,21 @@ const TypingResultKeyboard = ({ highlightKeys, isKorean, toggleKoreanLayout }) =
             // 영어 레이아웃
             default: [
               "` 1 2 3 4 5 6 7 8 9 0 - = {bksp}",
-              "{tab} q w e r t y u i o p [ ] \\",
-              "{lock} a s d f g h j k l ; ' {enter}",
+              "q w e r t y u i o p [ ] \\",
+              "a s d f g h j k l ; ' {enter}",
               "{shift} z x c v b n m , . / {shift}",
-              ".com @ {space} 한/영"
+              "{space} 한/영"
             ],
             shift: [
               "~ ! @ # $ % ^ & * ( ) _ + {bksp}",
-              "{tab} Q W E R T Y U I O P { } |",
-              '{lock} A S D F G H J K L : " {enter}',
+              "Q W E R T Y U I O P { } |",
+              'A S D F G H J K L : " {enter}',
               "{shift} Z X C V B N M < > ? {shift}",
-              ".com @ {space} 한/영"
+              "{space} 한/영"
             ]
           }
         }
         onKeyPress={(button) => {
-          console.log("Button pressed", button);
           if (button === "{shift}" || button === "{lock}") handleShift();
           if (button === "한/영") toggleKoreanLayout(); // 한/영 키를 누르면 레이아웃 전환
         }}
