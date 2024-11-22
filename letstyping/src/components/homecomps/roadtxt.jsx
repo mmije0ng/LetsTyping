@@ -1,97 +1,134 @@
 import styled from "styled-components";
 import GoButton from "./goButton";
-import { useNavigate } from "react";
+import { useNavigate } from "react-router-dom";
 import yaml from "js-yaml";
 import { useState, useEffect } from "react";
+import ListItemComponent from "./listitem";
+
 
 const Roadtxt = () =>{
     //파일 선택 관련 
     const [data, setData] = useState([]); 
     const [selectedItem, setSelectedItem] = useState(null);
+    //언어 선택
+    const [language, setLanguage] = useState("kr");
 
     //페이지 이동
-    //const navigate = useNavigate();
+    const navigate = useNavigate();
 
-     // YAML 파일 불러오기
     useEffect(() => {
-        fetch("/typingdatas-kr.yaml") // YAML 파일 경로
-            .then((response) => response.text()) // 텍스트 형식으로 불러옴
+        const filePath = language === "kr" ? "/typingdatas-kr.yaml" : "/typingdatas-en.yaml";
+        fetch(filePath)
+            .then((response) => response.text())
             .then((text) => {
                 const parsedData = yaml.load(text); // YAML 데이터를 JavaScript 객체로 변환
                 setData(parsedData); // 데이터 상태에 저장
             })
             .catch((error) => console.error("Error loading YAML:", error));
-    }, []);
+    }, [language]); // 언어 변경 시 파일 다시 불러오기
 
     const handleSelect = (item) => {
         setSelectedItem(item);
     };
 
+    //한/영 언어 변경
+    const handleLanguageChange = (lang) => {
+        setLanguage(lang); 
+        setSelectedItem(null); 
+    };
+
+
+    //버튼 클릭해서 다음 페이지로 전달 
+    const handleGoButtonClick = () => {
+        if (selectedItem) {
+            navigate("/typing", { state: { content: selectedItem.content } });
+        } else {
+            // 선택된 항목이 없을 경우
+            alert("타이핑 할 글을 선택해주세요!");
+        }
+    };
+
     return (
         <MainWrapp>
             <Headers>
-                <div>
-                    뜌 어 어 어 
-                </div>
-                <GoButton />
+                <LanguageButtons>
+                        <LanguageButton
+                            isActive={language === "kr"}
+                            onClick={() => handleLanguageChange("kr")}
+                        >
+                            한글
+                        </LanguageButton>
+                        <LanguageButton
+                            isActive={language === "en"}
+                            onClick={() => handleLanguageChange("en")}
+                        >
+                            English
+                        </LanguageButton>
+                </LanguageButtons>
+                <GoButton onClick={handleGoButtonClick} />
             </Headers>
-            <ListContainer>
-                {data.map((item) => (
-                    <ListItem key={item.id} onClick={() => handleSelect(item)}>
-                        <h3>{item.title}</h3>
-                        <p>{item.content}</p>
-                    </ListItem>
-                ))}
-            </ListContainer>
-            {selectedItem && (
-                <SelectedItemDetails>
-                    <h3>선택된 항목</h3>
-                    <p><strong>제목:</strong> {selectedItem.title}</p>
-                    <p><strong>내용:</strong> {selectedItem.content}</p>
-                </SelectedItemDetails>
-            )}
+            <Bodys>
+                <ListContainer>
+                    {data.map((item) => (
+                        //아이템 컴포넌트 호출 
+                        <ListItemComponent
+                        key={item.id}
+                        item={item}
+                        isSelected={selectedItem && selectedItem.id === item.id}
+                        onSelect={handleSelect} // 클릭 시 동작할 함수 전달
+                    />
+                    ))}
+                </ListContainer>
+    
+            </Bodys>
         </MainWrapp>
     )
 }
 
-const SelectedItemDetails = styled.div`
-    margin-top: 20px;
-    padding: 16px;
-    background-color: #eef6ff;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+const LanguageButtons = styled.div`
+    display: flex;
+    gap: 8px;
+`;
+
+const LanguageButton = styled.button`
+    background-color: ${({ isActive }) => (isActive ? "#ffcce0" : "#ffffff")};
+    color: ${({ isActive }) => (isActive ? "#000" : "#555")};
+    border: none;
+    padding: 8px 16px;
+    cursor: pointer;
+    font-size: 1.2em;
+
+    width: 130.5px;
+    height: 50px;
+    border-radius: 9999px;
+
+    &:hover {
+        background-color: #ffdde7;
+    }
 `;
 
 const ListContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    
+    gap: 25px;
     width: 100%;
     padding: 16px;
-`;
-
-const ListItem = styled.div`
-    background-color: #f5f5f5;
-    padding: 16px;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    cursor: pointer;
-    h3 {
-        margin: 0;
-        font-size: 18px;
-    }
-    p {
-        margin: 0;
-        font-size: 14px;
-        color: #555;
-    }
+    max-height: calc(100% - 40px); 
+    overflow-y:auto;
 `;
 
 const Headers = styled.article`
+margin-top:50px;
 display:flex;
 justify-content: space-between;
 gap:170px;
 margin-bottom:20px;
+`
+
+const Bodys = styled.article`
+display:flex;
+min-height:80%;
 `
 
 const MainWrapp = styled.main `
@@ -104,6 +141,7 @@ border-radius: 8px;
 flex-direction:column;
 justify-content: center; /* 필요에 따라 정렬 옵션 추가 */
   align-items: center; /* 세로 축 정렬 */
+overflow: hidden;
 `
 
-export default Roadtxt
+export default Roadtxt;
