@@ -2,8 +2,12 @@ import logo from './logo.svg';
 import GlobalStyle from './styles/globalstyles';
 import RootLayout from './layouts/root-layout';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 
 import Home from './pages/home';
+import Ranking from './pages/Ranking';
+
+const theme = extendTheme();
 
 const router = new createBrowserRouter([
   {
@@ -29,7 +33,7 @@ const router = new createBrowserRouter([
       },
       {
         path: 'ranking',
-        element:<Home/> //랭킹컴포넌트 삽입
+        element:<Ranking/> //랭킹컴포넌트 삽입
       }
     ]
   }
@@ -37,10 +41,10 @@ const router = new createBrowserRouter([
 
 function App() {
   return (
-    <>
-    <GlobalStyle/>
-    <RouterProvider router={router}/>
-    </>
+    <ChakraProvider theme={theme}>
+      <GlobalStyle/>
+      <RouterProvider router={router}/>
+    </ChakraProvider>
   );
 }
 
