@@ -1,8 +1,9 @@
 import styled from "styled-components";
 
-const GoButton =() =>{
+//button 재사용을 위해 컴포넌트 분리함
+const GoButton =({onClick}) =>{
     return(
-        <Button>GO</Button>
+        <Button onClick={onClick}>GO</Button>
     )
 }
 

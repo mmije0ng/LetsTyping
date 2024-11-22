@@ -5,6 +5,8 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import Home from './pages/home';
 
+import Typingtest from './components/typingtest';
+
 const router = new createBrowserRouter([
   {
     path:'/',
@@ -21,7 +23,7 @@ const router = new createBrowserRouter([
       ,
       {
         path: 'typing',
-        element:<Home/> //타이핑 컴포넌트 삽입
+        element:<Typingtest/> //타이핑 컴포넌트 삽입
       },
       {
         path: 'result',

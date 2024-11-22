@@ -1,22 +1,34 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import GoButton from "./goButton";
+import { useState } from "react";
 
 
 const Copytxt = () =>{
+    //textarea 값 넘기기
+    const [inputValue, setInputValue] = useState("");
+    //페이지 이동
     const navigate = useNavigate();
+
+    const handleNavigate = () => {
+        navigate("/typing", { state: { inputValue } }); // 상태(state)로 데이터 전달
+    };
+
     return (
         <MainWrapp>
             <Headers>
                 <div>
                     <SPAN>직접 가져올래요 </SPAN> 
-                    <img src="images/WHand.png"/>
+                    <img src="images/WHand.png" alt = "Hand"/>
                 </div>
-                <GoButton onClick={() => navigate("/typing")}/>
+                <GoButton onClick={handleNavigate}/>
             </Headers>
             
             
-            <Input placeholder="이곳에 붙여넣기 하세요."/>
+            <Input placeholder="이곳에 붙여넣기 하세요."
+            value={inputValue}
+            onChange={(e) => setInputValue(e.target.value)}
+            />
         </MainWrapp>
     )
 }
