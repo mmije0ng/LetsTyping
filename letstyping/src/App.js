@@ -1,9 +1,10 @@
-import logo from './logo.svg';
 import GlobalStyle from './styles/globalstyles';
 import RootLayout from './layouts/root-layout';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import Home from './pages/home';
+import Typing from './pages/typing';
+
 
 const router = new createBrowserRouter([
   {
@@ -21,7 +22,7 @@ const router = new createBrowserRouter([
       ,
       {
         path: 'typing',
-        element:<Home/> //타이핑 컴포넌트 삽입
+        element:<Typing/> //타이핑 컴포넌트 삽입
       },
       {
         path: 'result',

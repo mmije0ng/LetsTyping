@@ -6,7 +6,7 @@ const Navbar = () => {
     const location = useLocation(); 
 
     //특정 경로에서 배경 이미지 추가 
-    const isSpecialRoute = ["/upload", "/typing", "/result", "/ranking"].includes(location.pathname);
+    const isSpecialRoute = ["/","/upload", "/typing", "/result", "/ranking"].includes(location.pathname);
     
     return(
         <NavWrapp isSpecialRoute={isSpecialRoute}>
