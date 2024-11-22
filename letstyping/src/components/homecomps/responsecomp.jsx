@@ -18,11 +18,15 @@ const HomeSecond = ({name}) => {
 
     return(
     <MainWrapp>
+        
+        <>
         <Hello>
             안녕하세요, <br></br>
             <span style={{fontWeight:600}}>{name}</span> 님!
-            <img src="/images/HHand.png"/>
+            <img src="/images/HHand.png" style={{width:'1.2em'}}/>
         </Hello>
+        </>
+        
         <CatWrapp>
             <SpanCat>함께 할 고양이를 선택해 주세요</SpanCat>
             <CatContainer>
@@ -86,31 +90,56 @@ margin-bottom:60px;
 `
 
 const BoxWrapp = styled.article`
+
 display:flex;
 flex-direction:row;
 gap:30px;
+justify-content: center;
+align-item: center;
+margin:20px;
+box-sizing: border-box; 
+width:95%;
+
+
+@media (max-width: 768px) { 
+        flex-direction: column; 
+        gap: 20px; 
+    }
 `
 
 const MainWrapp = styled.main`
 display:flex;
+width:100vw;
 margin-top:100px;
 flex-direction:column;
-
+padding:10px;
 
 `
 
-const Hello = styled.span`
+const Hello = styled.div`
 
 margin-right: auto; 
+margin-left:30px;
+
 font-family: 'Montserrat';
 font-style: normal;
 font-weight: 400;
 font-size: 36px;
-line-height: 44px;
 
 color: #080808;
 margin-bottom:100px;
 
+@media (max-width: 768px) {
+        font-size: 24px;
+        line-height: 32px;
+        margin-bottom: 50px;
+    }
+
+    @media (max-width: 480px) {
+        font-size: 18px;
+        line-height: 28px;
+        margin-bottom: 30px;
+    }
 
 
 `

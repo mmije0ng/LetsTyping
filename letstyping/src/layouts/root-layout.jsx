@@ -16,6 +16,7 @@ const LayoutContainer = styled.div `
     flex-direction: column;
     
     height: 100vh;
+    width: 100%;
 
 `
 

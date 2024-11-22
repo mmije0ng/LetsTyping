@@ -86,8 +86,7 @@ const Roadtxt = () =>{
 }
 
 const LanguageButtons = styled.div`
-    display: flex;
-    gap: 8px;
+    
 `;
 
 const LanguageButton = styled.button`
@@ -122,8 +121,16 @@ const Headers = styled.article`
 margin-top:50px;
 display:flex;
 justify-content: space-between;
-gap:170px;
+gap:120px;
 margin-bottom:20px;
+padding:20px;
+
+    align-items: center; /* 요소가 세로로 중앙 정렬 */
+    @media (max-width: 400px) {
+        gap: 10px; /* 작은 화면에서 간격 줄이기 */
+        justify-content: center; /* 요소 중앙 정렬 */
+        
+    }
 `
 
 const Bodys = styled.article`
@@ -133,15 +140,19 @@ min-height:80%;
 
 const MainWrapp = styled.main `
 display:flex;
-width: 608px;
+width: 56vw;
+min-width:400px;
+max-width:600px;
 height: 874px;
+padding:20px;
 background: #FFFFFF;
 box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.25);
 border-radius: 8px;
 flex-direction:column;
-justify-content: center; /* 필요에 따라 정렬 옵션 추가 */
+justify-content: center; 
   align-items: center; /* 세로 축 정렬 */
-overflow: hidden;
+overflow-y: hidden;
+overflow-x:hidden;
 `
 
 export default Roadtxt;

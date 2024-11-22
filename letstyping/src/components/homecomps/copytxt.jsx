@@ -24,7 +24,7 @@ const Copytxt = () =>{
             <Headers>
                 <div>
                     <SPAN>직접 가져올래요 </SPAN> 
-                    <img src="images/WHand.png" alt = "Hand"/>
+                    <img src="images/WHand.png" alt = "Hand" style={{width:'1.2em'}}/>
                 </div>
                 <GoButton onClick={handleNavigate}/>
             </Headers>
@@ -50,8 +50,9 @@ const SPAN = styled.span `
 font-family: 'Montserrat';
 font-style: normal;
 font-weight: 500;
-font-size: 24.7708px;
+font-size: 1.8em;
 line-height: 30px;
+width:100%;
 
 color: #080808;
 
@@ -71,11 +72,13 @@ resize: none;
 const MainWrapp = styled.main `
 display:flex;
 flex-direction:column;
-width: 553px;
+width:50vw;
+min-width:200px;
+max-width: 500px;
 height: 874px;
+padding:30px;
 
-justify-content: center; /* 필요에 따라 정렬 옵션 추가 */
-  align-items: center; /* 세로 축 정렬 */
+align-items: center; /* 세로 축 정렬 */
 
 background: #FFFFFF;
 box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.25);
