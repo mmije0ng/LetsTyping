@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import GlobalStyle from './styles/globalstyles';
 import RootLayout from './layouts/root-layout';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-
-import { ChakraProvider } from '@chakra-ui/react';
-
+import { ChakraProvider, extendTheme } from "@chakra-ui/react";
+import Ranking from './pages/Ranking';
 import Home from './pages/home';
-import TypingResult from './components/result/TypingResult'; // TypingResult 컴포넌트
+import TypingResult from './pages/TypingResult'; // TypingResult 컴포넌트
 import TypingCalculate from './components/result/TypingCalculate';
+
+const theme = extendTheme();
 
 const App = () => {
   const [resultData, setResultData] = useState(null); // TypingChallenge 결과 데이터
@@ -80,7 +81,7 @@ const App = () => {
         ,
         {
           path: 'ranking',
-          element: <Home />, // 랭킹 컴포넌트 삽입
+          element:<Ranking/> //랭킹컴포넌트 삽입
         },
         { // 타이핑 알고리즘 테스트
           path: 'typing-test',
@@ -97,9 +98,10 @@ const App = () => {
   ]);
 
   return (
-    <ChakraProvider>
-      <GlobalStyle />
-      <RouterProvider router={router} />
+
+    <ChakraProvider theme={theme}>
+      <GlobalStyle/>
+      <RouterProvider router={router}/>
     </ChakraProvider>
   );
 };

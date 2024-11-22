@@ -1,19 +1,19 @@
-// src/components/TypingResult.js
+// src/pages/TypingResult.js
 // 타이핑 결과 모달
 
 import React, { useState } from 'react';
-import ResultModal from './ResultModal';
 import { Box, Button } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
-import ResultDetailList from './ResultDetailList';
-import TypingResultCat from './TypingResultCat';
-import TypingKeywordList from './TypingKeywordList';
-import TypingResultKeyboard from './TypingResultKeyboard';
-import RankButton from './RankButton';
+import ResultModal from '../components/result/ResultModal';
+import ResultDetailList from '../components/result/ResultDetailList';
+import TypingResultCat from '../components/result/TypingResultCat';
+import TypingKeywordList from '../components/result/TypingKeywordList';
+import TypingResultKeyboard from '../components/result/TypingResultKeyboard';
+import RankButton from '../components/result/RankButton';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLink, faRedo } from '@fortawesome/free-solid-svg-icons';
 import styled from 'styled-components';
-import { ModalContentContainer } from '../../styles/result/typingResultStyles'; // 스타일 import
+import { ModalContentContainer } from '../styles/result/typingResultStyles'; // 스타일 import
 
 const TypingResult = ({ isOpen, onClose, data }) => {
     const navigate = useNavigate();
