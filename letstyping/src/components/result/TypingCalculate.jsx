@@ -78,19 +78,38 @@ const TypingCalculate = ({ data, onComplete }) => {
         const inputUnicode = splitToUnicode(value); // 입력 텍스트 유니코드 변환
 
         // diff-match-patch를 활용하여 비교
+        // 타겟 텍스트와 입력 텍스트를 비교
+        // op: 문자열의 상태 변화
+        // -1: 타겟 문자열에는 있었지만 입력된 문자열에는 없는 문자
+        // 0: 타겟 문자열과 입력된 문자열에 공통으로 있는 문자
+        // 1: 입력된 문자열에 추가된 문자 (입력된 문자)
         const diffs = dmp.diff_main(targetUnicode.join(""), inputUnicode.join(""));
         dmp.diff_cleanupSemantic(diffs);
 
         // 변경된 부분만 오타로 처리
+        // 배열을 순회하며 각 변경 내용을 처리
         diffs.forEach(([op, text], diffIndex) => {
-            if (op === 1) { // 입력된 문자 중 오타 처리
+            
+            //사용자가 입력한 텍스트에 추가된 문자(오타)로 처리
+            if (op === 1) { 
                 for (let i = 0; i < text.length; i++) {
-                    const char = text[i];
+                    // 추가된 문자열(text)의 개별 문자를 순회
+                    const char = text[i]; 
+
+                    // 입력된 문자(char)의 전체 문자열에서의 위치를 계산
+                    // diffIndex: diffs 배열 내의 현재 변경 구간의 인덱스
+                    // charIndex: 각 변경 구간을 인덱스(diffIndex)와 오프셋(i)로 구분해 문자의 고유 위치를 생성
                     const charIndex = diffIndex * targetUnicode.length + i;
 
                     // 중복 검증 방지
+                    // 이미 처리된 인덱스(charIndex)인지 확인
                     if (!currentProcessedIndices.has(charIndex)) {
+                        
+                        // 오타로 처리된 문자(char)의 발생 횟수를 누적
+                        // 문자(char)가 기존에 없으면 기본값 0으로 설정한 뒤 1을 추가
                         currentMistakeKeys[char] = (currentMistakeKeys[char] || 0) + 1;
+
+                        // 처리된 인덱스를 currentProcessedIndices에 추가하여 중복 처리를 방지
                         currentProcessedIndices.add(charIndex);
                     }
                 }
@@ -118,6 +137,47 @@ const TypingCalculate = ({ data, onComplete }) => {
                 setEndTime(Date.now());
                 setIsComplete(true);
             }
+        }
+    };
+
+    // 백스페이스 키 처리
+    const handleKeyDown = (e) => {
+        if (e.key === "Backspace") {
+            const updatedProcessedIndices = new Set(processedIndices);
+            const updatedMistakeKeys = { ...mistakeKeys };
+
+            // 현재 입력된 텍스트를 기반으로 유니코드 비교
+            const targetUnicode = splitToUnicode(targetText); // 타겟 텍스트 유니코드 변환
+            const inputUnicode = splitToUnicode(userInput); // 현재 입력 텍스트 유니코드 변환
+
+            // diff-match-patch를 활용하여 비교
+            const diffs = dmp.diff_main(targetUnicode.join(""), inputUnicode.join(""));
+            dmp.diff_cleanupSemantic(diffs);
+
+            // 백스페이스 처리 후 변경된 부분만 다시 검사
+            diffs.forEach(([op, text], diffIndex) => {
+                if (op === -1) {
+                    // 삭제된 문자
+                    for (let i = 0; i < text.length; i++) {
+                        const charIndex = diffIndex + i;
+                        updatedProcessedIndices.delete(charIndex); // 삭제된 문자 인덱스를 초기화
+                    }
+                } else if (op === 1) {
+                    // 추가된 문자(입력된 부분 검사)
+                    for (let i = 0; i < text.length; i++) {
+                        const char = text[i];
+                        const charIndex = diffIndex + i;
+
+                        if (!updatedProcessedIndices.has(charIndex)) {
+                            updatedMistakeKeys[char] = (updatedMistakeKeys[char] || 0) + 1;
+                            updatedProcessedIndices.add(charIndex);
+                        }
+                    }
+                }
+            });
+
+            setProcessedIndices(updatedProcessedIndices);
+            setMistakeKeys(updatedMistakeKeys);
         }
     };
 
@@ -159,6 +219,7 @@ const TypingCalculate = ({ data, onComplete }) => {
                 ref={inputRef}
                 value={userInput}
                 onChange={handleInputChange}
+                onKeyDown={handleKeyDown} // 백스페이스 이벤트 처리
                 placeholder="Start typing here..."
                 style={{
                     width: "100%",
