@@ -8,6 +8,7 @@ const HomeSecond = ({name}) => {
         <Hello>
             안녕하세요, <br></br>
             <span style={{fontWeight:600}}>{name}</span> 님!
+            <img src="/images/HHand.png"/>
         </Hello>
         <BoxWrapp>
                 <Roadtxt />

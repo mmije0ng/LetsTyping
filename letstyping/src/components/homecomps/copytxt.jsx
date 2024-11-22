@@ -1,27 +1,54 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import GoButton from "./goButton";
 
 
 const Copytxt = () =>{
     const navigate = useNavigate();
     return (
         <MainWrapp>
-            직접 가져올래요 
-            <Button onClick={() => navigate("/typing")}>
-                GO
-            </Button>
+            <Headers>
+                <div>
+                    <SPAN>직접 가져올래요 </SPAN> 
+                    <img src="images/WHand.png"/>
+                </div>
+                <GoButton onClick={() => navigate("/typing")}/>
+            </Headers>
+            
+            
             <Input placeholder="이곳에 붙여넣기 하세요."/>
         </MainWrapp>
     )
 }
-const Button = styled.button`
+
+const Headers = styled.article`
+display:flex;
+justify-content: space-between;
+gap:170px;
+margin-bottom:20px;
 
 `
 
-const Input = styled.input `
-width:95%;
+const SPAN = styled.span `
+font-family: 'Montserrat';
+font-style: normal;
+font-weight: 500;
+font-size: 24.7708px;
+line-height: 30px;
+
+color: #080808;
+
+
+`
+
+
+const Input = styled.textarea `
+width:80%;
 height:80%;
 border:none;
+font-size: 20px;
+resize: none;
+
 `
 
 const MainWrapp = styled.main `
