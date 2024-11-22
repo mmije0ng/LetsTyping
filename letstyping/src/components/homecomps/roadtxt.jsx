@@ -14,7 +14,7 @@ const Roadtxt = () =>{
 
      // YAML 파일 불러오기
     useEffect(() => {
-        fetch("/typingdatas.yaml") // YAML 파일 경로
+        fetch("/typingdatas-kr.yaml") // YAML 파일 경로
             .then((response) => response.text()) // 텍스트 형식으로 불러옴
             .then((text) => {
                 const parsedData = yaml.load(text); // YAML 데이터를 JavaScript 객체로 변환

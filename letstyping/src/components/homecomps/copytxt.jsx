@@ -11,6 +11,11 @@ const Copytxt = () =>{
     const navigate = useNavigate();
 
     const handleNavigate = () => {
+        //입력값 없으면 버튼처리 안함
+        if (!inputValue.trim()) { 
+            alert("내용을 입력해 주세요!");
+            return;
+        }
         navigate("/typing", { state: { inputValue } }); // 상태(state)로 데이터 전달
     };
 
