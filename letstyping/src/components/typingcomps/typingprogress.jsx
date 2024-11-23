@@ -15,7 +15,6 @@ const TypingProgress = ({ progress }) => {
         <Cat style={{ left: `${adjustedProgress}%` }}>
           <Lottie  animationData={MovingCat} style={style}  />
         </Cat>
-        
         <Progress style={{ width: (`${93-adjustedProgress}%`) }} />
       </ProgressBar>
     </>

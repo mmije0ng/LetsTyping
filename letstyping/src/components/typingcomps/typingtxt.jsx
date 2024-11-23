@@ -1,11 +1,13 @@
-// 컴포넌트 분리
-
 // 타이핑 진행률이 100%가 되면 종료 가 아니라 100뒤에 아무 키라도 입력하면 종료되게 만들기
 // 어떤 타자가 얼마나 틀렸는지 - 자음 모음 단위로 타이핑을 했을 때 잘못되었는지 봐야함
 //  - 필요한 글자와 타이핑한 글자 비교해서 틀리면 필요한 글자 count++;
 //  -- 한계 봉착..
 
+// input text 와 output 을 바로 넘길수 있게 만들기 - localStorage?
+
 // 타이핑 효과음 넣기
+
+// 음.. 일단은 ... originalText를 자소,공백,줄바꿈 단위로 분리한다음에 현재 진행도와  
 
 import React, { useState, useRef, useEffect } from "react";
 import styled, { keyframes } from "styled-components";
@@ -14,8 +16,8 @@ import TypingProgress from "./typingprogress";
 
 const TypingTxt = () => {
   //const originalText = "대한민국 역사박물관은 안의사의 하얼빈 의거 115주년을 기념해 '안중근 서'라는 제목의 특별전을 내년 3월 31일까지 개최해요.​";
-  //const originalText = "가는말이 고와야 오는말이 곱다.\n";
-  const originalText = "대한민국역사박물관은 안의사의\n하얼빈 의거 115주년을 기념해 '안중근 서'라는 제목의\n특별전을 내년 3월 31일까지 개최해요.\n"
+  const originalText = "안녕하세요.\n";
+  //const originalText = "대한민국 역사박물관은 안의사의\n\n하얼빈 의거 115주년을 기념해\n\n특별전을 내년 3월 31일까지 개최해요.\n" // 끝에 무조건 줄바꿈 넣기
   const [userInput, setUserInput] = useState("");
   const [progress, setProgress] = useState(0);
   const [startTime, setStartTime] = useState(null);
@@ -236,37 +238,42 @@ const TypingTxt = () => {
 
   return (
     <Container>
+      {/* 진행도 bar */}
       <TypingProgress progress={progress} />
+      {/* 현재 status */}
       <Status>
-        <span>타수: {cpm} CPM</span>
-        <span>속도: {wpm} WPM</span>
+        <span>지금 입력해야 할 단어 :{}</span>
+        <span>분당 타수: {cpm} CPM</span>
+        <span>분당 단어수(words per Minute): {wpm} WPM</span>
         <span>진행도: {progress.toFixed(1)}%</span>
         <span>오타 수: {errors}</span>
       </Status>
 
       <>
-      <TextContainer>
-        <OriginalText>{originalText}</OriginalText>
-        <UserInputOverlay>{renderOverlay()}</UserInputOverlay>
-      </TextContainer>
-      <InputField
-        ref={inputRef}
-        value={userInput}
-        onChange={handleInputChange}
-        placeholder=""
-        onMouseDown={preventDefaultBehavior} // 마우스 클릭 시 선택 방지
-        spellCheck={false}
-        autoCorrect="off"
-        autoCapitalize="off"
-        autoComplete="off"
-        onKeyDown={(e) => {
-          if (e.ctrlKey && e.key === "a") {
-            e.preventDefault(); // Ctrl + A 방지
-          }
-        }}
-      />
-      </>
+        {/* 타이핑 모션이 보이는 공간 */}
+        <TextContainer>
+          <OriginalText>{originalText}</OriginalText>
+          <UserInputOverlay>{renderOverlay()}</UserInputOverlay>
+        </TextContainer>
 
+        {/* 실제로 타이핑하는 공간 */}
+        <InputField
+          ref={inputRef}
+          value={userInput}
+          onChange={handleInputChange}
+          placeholder=""
+          onMouseDown={preventDefaultBehavior} // 마우스 클릭 시 선택 방지
+          spellCheck={false}
+          autoCorrect="off"
+          autoCapitalize="off"
+          autoComplete="off"
+          onKeyDown={(e) => {
+            if (e.ctrlKey && e.key === "a") {
+              e.preventDefault(); // Ctrl + A 방지
+            }
+          }}
+        />
+      </>
 
     </Container>
   );
@@ -274,7 +281,6 @@ const TypingTxt = () => {
 
 export default TypingTxt;
 
-// 스타일 컴포넌트
 const Container = styled.div`
   width: 1000px;
   margin: 20px auto;
@@ -283,9 +289,9 @@ const Container = styled.div`
 
 const TextContainer = styled.div`
   position: relative;
-  font-size: 18px;
+  font-size: 20px;
   line-height: 1.6;
-  color: #ccc;
+  color: white;
   margin-bottom: 20px;
 `;
 
@@ -305,19 +311,15 @@ const UserInputOverlay = styled.div`
   z-index: 2;
 
   /* 기본 입력 필드와 동일한 스타일 */
-  font-size: 18px;
+  font-size: 20px;
   line-height: 1.6;
   font-family: Arial, sans-serif;
 
   /* 텍스트 선택 방지 */
   user-select: none;
-
-  /* 오버레이 텍스트 배경을 흰색으로 설정 */
-  background-color: white;
 `;
 
 
-// 호이스팅이 안되네 ㅋㅋㅋ
 const blink = keyframes`
   50% {
     opacity: 0;
@@ -325,9 +327,8 @@ const blink = keyframes`
 `;
 
 const Char = styled.span`
-  color: ${({ correct, completed }) =>
-    correct ? "black" : completed ? "red" : "gray"}; /* 완료된 글자 색상 */
-
+  color: ${({ correct, completed }) => correct ? "black" : completed ? "red" : "gray"}; /* 완료된 글자 색상 */
+  background-color: ${({ correct, completed }) => !correct && completed ? "rgba(255, 0, 0, 0.3)" : "transparent"}; /* 틀린 글자 배경색 */
   position: relative;
 
   ${({ typing }) =>
@@ -352,9 +353,10 @@ const Cursor = styled.span`
 const InputField = styled.textarea`
   width: 100%;
   height: 100px;
-  font-size: 18px;
+  font-size: 20px;
   line-height: 1.6;
   border: none;
+  overflow: hidden; /* 스크롤바 숨기기 */
   outline: none;
   background: transparent; /* 텍스트 박스를 투명하게 */
   color: transparent; /* 사용자가 입력한 텍스트 숨기기 */
@@ -373,12 +375,6 @@ const InputField = styled.textarea`
   -moz-user-select: none;
   -ms-user-select: none;
   
-`;
-
-const Progress = styled.div`
-  height: 100%;
-  width: 0;
-  background: #4caf50;
 `;
 
 const Status = styled.div`
