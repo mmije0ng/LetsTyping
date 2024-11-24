@@ -1,13 +1,6 @@
-// 타이핑 진행률이 100%가 되면 종료 가 아니라 100뒤에 아무 키라도 입력하면 종료되게 만들기
-// 어떤 타자가 얼마나 틀렸는지 - 자음 모음 단위로 타이핑을 했을 때 잘못되었는지 봐야함
-//  - 필요한 글자와 타이핑한 글자 비교해서 틀리면 필요한 글자 count++;
-//  -- 한계 봉착..
-
 // input text 와 output 을 바로 넘길수 있게 만들기 - localStorage?
 
 // 타이핑 효과음 넣기
-
-// 음.. 일단은 ... originalText를 자소,공백,줄바꿈 단위로 분리한다음에 현재 진행도와  
 
 import React, { useState, useRef, useEffect } from "react";
 import styled, { keyframes } from "styled-components";
@@ -16,8 +9,8 @@ import TypingProgress from "./typingprogress";
 
 const TypingTxt = () => {
   //const originalText = "대한민국 역사박물관은 안의사의 하얼빈 의거 115주년을 기념해 '안중근 서'라는 제목의 특별전을 내년 3월 31일까지 개최해요.​";
-  const originalText = "안녕하세요.\n";
-  //const originalText = "대한민국 역사박물관은 안의사의\n\n하얼빈 의거 115주년을 기념해\n\n특별전을 내년 3월 31일까지 개최해요.\n" // 끝에 무조건 줄바꿈 넣기
+  //const originalText = "안녕하세요.\n";
+  const originalText = "대한민국 역사박물관은 안의사의\n\n하얼빈 의거 115주년을 기념해\n\n특별전을 내년 3월 31일까지 개최해요.\n" // 끝에 무조건 줄바꿈 넣기
   const [userInput, setUserInput] = useState("");
   const [progress, setProgress] = useState(0);
   const [startTime, setStartTime] = useState(null);
@@ -74,23 +67,30 @@ const TypingTxt = () => {
     const progressValue = Math.min((value.length / originalText.length) * 100, 100);
     setProgress(progressValue);
   
-    // 자소 단위 오타 계산 및 기록
-    value.split("").forEach((char, index) => {
-      const targetChar = originalText[index] || ""; // 정답 글자
-      const userChar = char || ""; // 사용자가 입력한 글자
+    let updatedUserInput = value;
+
+    // 자소 단위로 비교
+    const originalChars = Hangul.disassemble(originalText); // 정답 텍스트 자소 배열
+    const userChars = Hangul.disassemble(updatedUserInput); // 입력 텍스트 자소 배열
   
-      // 한글 조합 해체
-      const targetDisassembled = Hangul.disassemble(targetChar); // 정답 분해
-      const userDisassembled = Hangul.disassemble(userChar); // 사용자 입력 분해
-  
-      // 자소별 비교
-      targetDisassembled.forEach((part, i) => {
-        if (part !== userDisassembled[i]) {
-          recordError(part); // 틀린 초/중/종성을 기록
+    // 비교 대상 자소 인덱스 (현재 입력해야 할 자소)
+    let currentIndex = userChars.length - 1; // 입력된 자소 배열 길이 기준
+
+    if (currentIndex < originalChars.length) {
+      const userChar = userChars[currentIndex] || "";
+      const targetChar = originalChars[currentIndex] || "";
+
+      if (targetChar === "\n") {
+        // 줄바꿈 문자 무시하고 다음 자소로 이동
+        if (userChar === "\n") {
+          currentIndex++; // 올바른 줄바꿈 입력
         }
-      });
-    });
-  
+      } else if (userChar !== targetChar) {
+        // 현재 자소 오타 기록
+        recordError(targetChar); // 오타 기록
+      }
+    }
+
     // 음절 단위 오타 계산
     const errorCount = calculateErrors(value);
     setErrors(errorCount);
