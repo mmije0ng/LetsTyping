@@ -1,3 +1,5 @@
+// 타이핑 결과 모달
+
 import React, { useState, useMemo } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Box, Button } from '@chakra-ui/react';
@@ -39,6 +41,7 @@ const TypingResult = () => {
 
   // 랭킹 페이지로 이동
   const goToRankPage = () => {
+    
     navigate('/ranking', {
       state: {
         title: content.title,
@@ -57,7 +60,7 @@ const TypingResult = () => {
 
   const [isModalOpen, setIsModalOpen] = useState(true); // 모다 상태
 
-  console.log('타이핑 결과 데이터:', receivedData);
+  console.log('타이핑 결과 페이지 받아온 데이터:', receivedData);
   console.log(`점수: ${score}`);
 
   return (
@@ -67,6 +70,8 @@ const TypingResult = () => {
         <Box display="flex" flexDirection="column" alignItems="flex-start" zIndex="2">
           <ResultDetailList time={time} cpm={cpm} errorCount={errorCount} />
           <Box display="flex" gap="10px" mt="4">
+            
+            {/* link 버튼 */}
             <Button
               colorScheme="blue"
               onClick={() => alert('Link')}
@@ -75,20 +80,23 @@ const TypingResult = () => {
             >
               Link
             </Button>
+            
+            {/* typing으로 이동하는 retry 버튼 */}
             <Button
               colorScheme="gray"
-              onClick={() => navigate('/typing')}
+              onClick={() => navigate('/typing', { state: { content } })}
               w="65px"
               h="27.8px"
             >
               Retry
             </Button>
+
           </Box>
         </Box>
 
         {/* 중앙: 고양이 이미지 */}
         <Box position="relative" zIndex="1" ml="-179px" mt="30px">
-          <TypingResultCat />
+          <TypingResultCat id={content.id} />
         </Box>
 
         {/* 우측: 키워드 목록 표시 */}

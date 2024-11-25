@@ -1,3 +1,5 @@
+// 타이핑 결과 페이지
+
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import TypingResult from '../components/result/TypingResult';
