@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Box, Button } from '@chakra-ui/react';
 import ResultModal from './ResultModal';
@@ -13,47 +13,56 @@ const TypingResult = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  // 데이터 수신 (기본값 추가)ss
-  const data = location?.state || {
+  // 데이터 수신 (기본값 추가)
+  const receivedData = location?.state || {
     content: {
-      id: null,
-      title: '',
-      keywords: [],
-      content: '',
+      id: null, // 고양이 아이디
+      title: '', // 제목
+      keywords: [], // 키워드 맵 (keyword, description)
+      content: '', // 내용
     },
-    cpm: 0,
-    time: 0,
-    errorCount: 0,
-    errorCounts: {},
-    isKorean: true,
+    cpm: 0, // 타수
+    time: 0, // 시간
+    errorCount: 0, // 오타수
+    errorCounts: {}, // 틀린 키, 횟수 맵
+    name: '', // 유저 이름
+    isKorean: true, // 한글, 영어 여부
   };
 
-
-console.log('Data received:', data);
-console.dir(data.content); 
-console.dir(data.errorCounts);
-
-
+  const { content, cpm, time, errorCount, errorCounts, name } = receivedData;
   const [isKorean, setIsKorean] = useState(true);
+  // const [isKorean, setIsKorean] = useState(receivedData.isKorean);
+
+  
+  // 점수 계산
+  const score = useMemo(() => cpm - (errorCount * 10), [cpm, errorCount]);
 
   const goToRankPage = () => {
-    navigate('/ranking');
+
+    navigate('/ranking', {
+      state: {
+        title: content.title,
+        name,
+        score,
+        keywords: content.keywords,
+      },
+    });
+    
   };
 
   const toggleKoreanLayout = () => {
     setIsKorean((prev) => !prev);
   };
 
+  console.log('타이핑 결과 데이터:', receivedData);
+  console.log(`점수: ${score}`);
+
   return (
     <ResultModal isOpen={true} onClose={() => navigate('/')}>
       <ModalContentContainer>
         {/* 좌측: 타수, 시간, 정확도 정보와 버튼 */}
         <Box display="flex" flexDirection="column" alignItems="flex-start" zIndex="2">
-          <ResultDetailList
-            time={data.time}
-            cpm={data.cpm}
-            errorCount={data.errorCount}
-          />
+          <ResultDetailList time={time} cpm={cpm} errorCount={errorCount} />
           <Box display="flex" gap="10px" mt="4">
             <Button
               colorScheme="blue"
@@ -81,8 +90,8 @@ console.dir(data.errorCounts);
 
         {/* 우측: 키워드 목록 표시 */}
         <Box flex="1" ml="20px" width="50%">
-          {data.content.keywords?.length > 0 ? (
-            <TypingKeywordList keywords={data.content.keywords} />
+          {content.keywords?.length > 0 ? (
+            <TypingKeywordList keywords={content.keywords} />
           ) : (
             <p>No keywords available</p> // 키워드가 없을 경우 표시
           )}
@@ -92,7 +101,7 @@ console.dir(data.errorCounts);
       {/* 하단: 가상 키보드 */}
       <Box mt="20px" width="100%">
         <TypingResultKeyboard
-          mistakeKeys={data.errorCounts}
+          mistakeKeys={errorCounts}
           isKorean={isKorean}
           toggleKoreanLayout={toggleKoreanLayout}
         />

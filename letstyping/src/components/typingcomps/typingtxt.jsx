@@ -125,11 +125,12 @@ const TypingTxt = ({location}) => {
 
 
       navigate("/result", { state: { 
-        content: location.state.content, // 템플릿 리터럴 사용하지 않음
+        content: location.state.content,
+        name: location.state.name,
         cpm: cpmValue,
         time: timeElapsed,
         errorCount: errorCount,
-        errorCounts: errorCounts, // 템플릿 리터럴 사용하지 않음
+        errorCounts: errorCounts, 
       }});      
       
       resetInput(); // 현재는 반복으로 구현
