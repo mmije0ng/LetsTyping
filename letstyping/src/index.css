@@ -1,0 +1,12 @@
+.hg-light-red {
+    background-color: #FFD1D1 !important; /* 아주 연한 빨간색 */
+  }
+  
+  .hg-medium-red {
+    background-color: #FF7F7F !important; /* 중간 연한 빨간색 */
+  }
+  
+  .hg-red {
+    background-color: #FF4C4C !important; /* 좀 더 진한 빨간색 */
+  }
+  
