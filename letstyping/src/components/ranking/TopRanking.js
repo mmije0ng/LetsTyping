@@ -16,17 +16,17 @@ const TopRanking = ({ rankingData }) => {
     .sort((a, b) => a.order - b.order); // 순위를 정렬하여 2위, 1위, 3위 순서대로 배치
 
   return (
-    <HStack spacing={5} justify="center" align="flex-end">
+    <HStack spacing={[2, 5]} justify="center" align="flex-end">
       {orderedRankingData.map((rank, index) => (
         <VStack key={rank.id} align="center" spacing={2}>
           {/* 순위 박스 */}
           <Box
             bg="#DFDFDF"
             borderRadius="md"
-            p={2}
+            p={[1, 2]}
             textAlign="center"
             boxShadow="md"
-            width="100px"
+            width={["70px", "80px", "100px"]}
             height={index === 0 ? "190px" : index === 1 ? "260px" : "150px"}
             display="flex"
             flexDirection="column"
@@ -39,13 +39,13 @@ const TopRanking = ({ rankingData }) => {
                 index === 0 ? secondPlaceImage : index === 1 ? firstPlaceImage : thirdPlaceImage
               }
               alt={`${index === 0 ? "2위" : index === 1 ? "1위" : "3위"} 순위`}
-              width="80px" // 이미지 크기 조정
+              width="80px" 
               height="80px"
               style={{ marginBottom: "10px" }}
             />
 
             {/* 점수 표시 */}
-            <Text fontSize="3xl" fontWeight="bold" color="white" mt="auto">{rank.score}</Text>
+            <Text fontSize={["lg", "2xl", "3xl"]} fontWeight="bold" color="white" mt="auto">{rank.score}</Text>
           </Box>
 
           {/* 이름을 Box로 빼고 스타일을 동일하게 적용 */}
@@ -53,10 +53,10 @@ const TopRanking = ({ rankingData }) => {
             bg="#BBBBBB"
             color="white"  // 폰트 색 하양
             borderRadius="md"
-            p={4}
+            p={[2, 3]}
             textAlign="center"
             boxShadow="md"
-            width="100px"
+            width={["60px", "80px", "100px"]}
             height="30px"
             display="flex"
             flexDirection="column"

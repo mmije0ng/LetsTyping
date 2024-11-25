@@ -15,15 +15,15 @@ const MyRanking = ({ displayData, myData, myRank }) => {
       }}
       transition={{
         duration: 0.7, // 1초마다 깜빡이기
-        repeat: 1, // 무한 반복
+        repeat: 1, 
         repeatType: "loop", // 애니메이션 방향을 반대로
       }}
 
       bg={"#FFFFFF"}
       boxShadow={myData ? "0 4px 10px rgba(0, 0, 0, 0.4)" : "none"} // 내 랭킹만 그림자
       borderRadius={myData ? "lg" : "none"}
-      p={6}
-      width="360px"
+      p={[2, 4, 6]}
+      width={["90%", "80%", "360px"]}
       height={myData ? "70px" : "60px"}
       display="flex" // Flex 컨테이너
       alignItems="center" // 세로 정렬
