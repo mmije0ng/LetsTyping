@@ -12,7 +12,6 @@ import TypingResultKeyboard from '../components/result/TypingResultKeyboard';
 import RankButton from '../components/result/RankButton';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLink, faRedo } from '@fortawesome/free-solid-svg-icons';
-import styled from 'styled-components';
 import { ModalContentContainer } from '../styles/result/typingResultStyles'; // 스타일 import
 
 const TypingResult = ({ isOpen, onClose, data }) => {

@@ -211,33 +211,33 @@ const TypingCalculate = ({ data, onComplete }) => {
         navigate("/result"); // 타이핑 결과 페이지로 이동
     };
 
-    // return (
-    //     <div style={{ padding: "20px", maxWidth: "600px", margin: "0 auto" }}>
-    //         <h1>Typing Challenge</h1>
-    //         <p>Target Text: {targetText}</p>
-    //         <textarea
-    //             ref={inputRef}
-    //             value={userInput}
-    //             onChange={handleInputChange}
-    //             onKeyDown={handleKeyDown} // 백스페이스 이벤트 처리
-    //             placeholder="Start typing here..."
-    //             style={{
-    //                 width: "100%",
-    //                 height: "100px",
-    //                 margin: "10px 0",
-    //                 fontSize: "16px",
-    //             }}
-    //         />
-    //         <p>Mistakes:</p>
-    //         <ul>
-    //             {Object.entries(mistakeKeys).map(([key, count]) => (
-    //                 <li key={key}>
-    //                     {key}: {count} time(s)
-    //                 </li>
-    //             ))}
-    //         </ul>
-    //     </div>
-    // );
+    return (
+        <div style={{ padding: "20px", maxWidth: "600px", margin: "0 auto" }}>
+            <h1>Typing Challenge</h1>
+            <p>Target Text: {targetText}</p>
+            <textarea
+                ref={inputRef}
+                value={userInput}
+                onChange={handleInputChange}
+                onKeyDown={handleKeyDown} // 백스페이스 이벤트 처리
+                placeholder="Start typing here..."
+                style={{
+                    width: "100%",
+                    height: "100px",
+                    margin: "10px 0",
+                    fontSize: "16px",
+                }}
+            />
+            <p>Mistakes:</p>
+            <ul>
+                {Object.entries(mistakeKeys).map(([key, count]) => (
+                    <li key={key}>
+                        {key}: {count} time(s)
+                    </li>
+                ))}
+            </ul>
+        </div>
+    );
 };
 
 export default TypingCalculate;
