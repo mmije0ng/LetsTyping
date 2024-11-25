@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Box, Button } from '@chakra-ui/react';
-import ResultModal from '../components/result/ResultModal';
-import ResultDetailList from '../components/result/ResultDetailList';
-import TypingResultCat from '../components/result/TypingResultCat';
-import TypingKeywordList from '../components/result/TypingKeywordList';
-import TypingResultKeyboard from '../components/result/TypingResultKeyboard';
-import RankButton from '../components/result/RankButton';
-import { ModalContentContainer } from '../styles/result/typingResultStyles';
+import ResultModal from './ResultModal';
+import ResultDetailList from './ResultDetailList';
+import TypingResultCat from './TypingResultCat';
+import TypingKeywordList from './TypingKeywordList';
+import TypingResultKeyboard from './TypingResultKeyboard';
+import RankButton from './RankButton';
+import { ModalContentContainer } from '../../styles/result/typingResultStyles';
 
 const TypingResult = () => {
   const location = useLocation();
