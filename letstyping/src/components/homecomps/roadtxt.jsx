@@ -41,7 +41,7 @@ const Roadtxt = () =>{
     //버튼 클릭해서 다음 페이지로 전달 
     const handleGoButtonClick = () => {
         if (selectedItem) {
-            navigate("/typing", { state: { content: selectedItem.content } });
+            navigate("/typing", { state: { content: selectedItem } });
         } else {
             // 선택된 항목이 없을 경우
             alert("타이핑 할 글을 선택해주세요!");

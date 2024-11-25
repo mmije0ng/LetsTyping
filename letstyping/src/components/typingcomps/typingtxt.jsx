@@ -1,17 +1,23 @@
 // input text 와 output 을 바로 넘길수 있게 만들기 - localStorage?
-
+// 컴포넌트 나누기.
+// yaml 데이터 전달한거 받아서 해보기
+// 결과 데이터 전달하기
+// 걸린 시간, cpm, 오타수, 틀린횟수, 
 // 타이핑 효과음 넣기
+
+// 고양이 아이디, 유저이름, 글 내용.
+// 걸린시간, 타수, 오타수, 키워드, 키워드 설명, 자모음틀린횟수.
 
 import React, { useState, useRef, useEffect } from "react";
 import styled, { keyframes } from "styled-components";
 import Hangul from "hangul-js";
 import TypingProgress from "./typingprogress";
-import { useNavigate } from "react-router-dom"; // useNavigate 추가
+import { useNavigate } from 'react-router-dom';
 
-const TypingTxt = () => {
-  //const originalText = "대한민국 역사박물관은 안의사의 하얼빈 의거 115주년을 기념해 '안중근 서'라는 제목의 특별전을 내년 3월 31일까지 개최해요.​";
-  //const originalText = "안녕하세요.\n";
-  const originalText = "대한민국 역사박물관은 안의사의\n\n하얼빈 의거 115주년을 기념해\n\n특별전을 내년 3월 31일까지 개최해요.\n" // 끝에 무조건 줄바꿈 넣기
+const TypingTxt = ({location}) => {
+  //const originalText = "대한민국 역사박물관은 안의사의\n\n하얼빈 의거 115주년을 기념해\n\n특별전을 내년 3월 31일까지 개최해요.\n" // 끝에 무조건 줄바꿈 넣기
+  const originalText = location?.state?.content?.content || "";
+  console.log(location.state.content);
   const [userInput, setUserInput] = useState("");
   const [progress, setProgress] = useState(0);
   const [startTime, setStartTime] = useState(null);
@@ -19,9 +25,9 @@ const TypingTxt = () => {
   const [cpm, setCpm] = useState(0);
   const [errors, setErrors] = useState(0);
   const [errorCounts, setErrorCounts] = useState({});
+  const [nextChar, setNextChar] = useState(""); // 현재 입력해야 할 자소
   const inputRef = useRef(null);
-
-  const navigate = useNavigate(); // navigate 초기화
+  const navigate = useNavigate();
 
   // 오타 기록 함수
   const recordError = (wrongChar) => {
@@ -82,15 +88,15 @@ const TypingTxt = () => {
     if (currentIndex < originalChars.length) {
       const userChar = userChars[currentIndex] || "";
       const targetChar = originalChars[currentIndex] || "";
-
+      setNextChar(originalChars[currentIndex+1]);
       if (targetChar === "\n") {
         // 줄바꿈 문자 무시하고 다음 자소로 이동
         if (userChar === "\n") {
           currentIndex++; // 올바른 줄바꿈 입력
         }
       } else if (userChar !== targetChar) {
-        // 현재 자소 오타 기록
-        recordError(targetChar); // 오타 기록
+        // 현재 사용자가 입력한 자소 오타 기록
+        recordError(targetChar); 
       }
     }
 
@@ -101,48 +107,32 @@ const TypingTxt = () => {
     // WPM 업데이트
     updateSpeed(value);
   
-    // // 진행도 100% 달성 시
-    // if (progressValue === 100) {
-    //   const timeElapsed = (Date.now() - startTime) / 1000; // 경과 시간 (초)
-    //   const wpmValue = wpm || calculateWPM(value, timeElapsed);
-    //   const cpmVlaue = cpm || calculateCPM(value, timeElapsed);
+    // 진행도 100% 달성 시
+    if (progressValue === 100) {
+      const timeElapsed = (Date.now() - startTime) / 1000; // 경과 시간 (초)
+      const wpmValue = wpm || calculateWPM(value, timeElapsed);
+      const cpmValue = cpm || calculateCPM(value, timeElapsed);
   
-    //   // 결과 모달 표시
-    //   alert(
-    //     `타이핑 완료!\nCPM: ${cpmVlaue} \nWPM: ${wpmValue} \n오타 수: ${errorCount}\n오타 기록:\n` +
-    //       Object.entries(errorCounts)
-    //         .map(([char, count]) => `${char}: ${count}번`)
-    //         .join("\n")
-    //   );
-    //   resetInput(); // 현재는 반복으로 구현
-    // }
+      // 결과 모달 표시---------------------------------------------------------------------
+      // 고양이id,키워드,키워드설명,걸린 시간,타수CPM,errorCount, errorCounts
+      // 
+      alert(
+        `타이핑 완료!\nCPM: ${cpmValue} \nWPM: ${wpmValue} \n오타 수: ${errorCount}\n오타 기록:\n` +
+          Object.entries(errorCounts)
+            .map(([char, count]) => `${char}: ${count}번`)
+            .join("\n")
+      );
 
-// 타이핑 로직 수정
-// 진행도 100% 달성 시
-  if (progressValue === 100) {
-    const timeElapsed = (Date.now() - startTime) / 1000; // 경과 시간 (초)
-    const wpmValue = wpm || calculateWPM(value, timeElapsed);
-    const cpmValue = cpm || calculateCPM(value, timeElapsed);
-
-    const resultData = {
-      time: timeElapsed,
-      wpmValue,
-      cpmValue,
-      errorCount,
-      errorCounts,
-      keywords: [
-        { keyword: "speed", description: "Typing speed analysis" },
-        { keyword: "accuracy", description: "Error and accuracy insights" },
-        { keyword: "focus", description: "Focus and consistency evaluation" },
-      ],      
-      isKorean: true, // 한글 상태
-    };
-
-    navigate('/result', { state: resultData }); // /result로 이동하며 데이터 전달
-    resetInput(); // 타이핑 입력 초기화
-  }     
-
-
+      navigate("/result", { state: { 
+        content: `${location.state.content}`,
+        cpm: `${cpmValue}`,
+        time: `${timeElapsed}`,
+        errorCount: `${errorCount}`,
+        errorCounts: `${errorCounts}`,
+       }});
+      
+      resetInput(); // 현재는 반복으로 구현
+    }
   };
 
   // 상태를 주기적으로 업데이트
@@ -269,10 +259,11 @@ const TypingTxt = () => {
   return (
     <Container>
       {/* 진행도 bar */}
-      <TypingProgress progress={progress} />
+
+      <TypingProgress progress={progress} catId={location.state.content.id} />
       {/* 현재 status */}
       <Status>
-        <span>지금 입력해야 할 단어 :{}</span>
+        <span>지금 입력해야 할 단어 :{nextChar || "완료!"}</span>
         <span>분당 타수: {cpm} CPM</span>
         <span>분당 단어수(words per Minute): {wpm} WPM</span>
         <span>진행도: {progress.toFixed(1)}%</span>
@@ -303,6 +294,7 @@ const TypingTxt = () => {
             }
           }}
         />
+
       </>
 
     </Container>

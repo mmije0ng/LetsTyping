@@ -2,19 +2,24 @@ import React from "react";
 import styled from "styled-components";
 
 import Lottie from "lottie-react";
-import MovingCat from "../../assets/images/MovingCat.json";
+import YellowCat from "../../assets/images/YellowCat.json";
+import BlackCat from "../../assets/images/BlackCat.json";
 import Pgbar from "../../assets/images/progressbar.png";
 
-const TypingProgress = ({ progress }) => {
+const TypingProgress = ({ progress, catId }) => {
   const maxProgress = 85;
-  const adjustedProgress = (progress / 100) * maxProgress;
-
+  const adjustedProgress = (progress / 100) * maxProgress;  
+  console.log(catId);
   return (
     <>
       <ProgressBar>
         <Cat style={{ left: `${adjustedProgress}%` }}>
-          <Lottie  animationData={MovingCat} style={style}  />
-        </Cat>
+        {catId === 1 ? (
+            <Lottie animationData={YellowCat} style={style} />
+          ) : (
+            <Lottie animationData={BlackCat} style={style} />
+          )}
+          </Cat>
         <Progress style={{ width: (`${93-adjustedProgress}%`) }} />
       </ProgressBar>
     </>
