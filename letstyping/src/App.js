@@ -68,17 +68,11 @@ const App = () => {
         {
           path: 'result',
           element: (
-            resultData ? (
-              <TypingResult
-                isOpen={isModalOpen}
-                onClose={closeModal}
-                data={resultData}
-              />
-            ) : (
-              // 타이핑 시작 전에는 결과 보기 불가
-              // 나중에 스타일 수정하기
-              <div>타이핑 시작 전에는 결과 보기 불가</div>
-            )
+            <TypingResult
+            isOpen={isModalOpen}
+            onClose={closeModal}
+            data={resultData}
+          />
           ),
         }
         ,

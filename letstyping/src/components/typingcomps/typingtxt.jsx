@@ -6,6 +6,7 @@ import React, { useState, useRef, useEffect } from "react";
 import styled, { keyframes } from "styled-components";
 import Hangul from "hangul-js";
 import TypingProgress from "./typingprogress";
+import { useNavigate } from "react-router-dom"; // useNavigate 추가
 
 const TypingTxt = () => {
   //const originalText = "대한민국 역사박물관은 안의사의 하얼빈 의거 115주년을 기념해 '안중근 서'라는 제목의 특별전을 내년 3월 31일까지 개최해요.​";
@@ -19,6 +20,8 @@ const TypingTxt = () => {
   const [errors, setErrors] = useState(0);
   const [errorCounts, setErrorCounts] = useState({});
   const inputRef = useRef(null);
+
+  const navigate = useNavigate(); // navigate 초기화
 
   // 오타 기록 함수
   const recordError = (wrongChar) => {
@@ -98,21 +101,48 @@ const TypingTxt = () => {
     // WPM 업데이트
     updateSpeed(value);
   
-    // 진행도 100% 달성 시
-    if (progressValue === 100) {
-      const timeElapsed = (Date.now() - startTime) / 1000; // 경과 시간 (초)
-      const wpmValue = wpm || calculateWPM(value, timeElapsed);
-      const cpmVlaue = cpm || calculateCPM(value, timeElapsed);
+    // // 진행도 100% 달성 시
+    // if (progressValue === 100) {
+    //   const timeElapsed = (Date.now() - startTime) / 1000; // 경과 시간 (초)
+    //   const wpmValue = wpm || calculateWPM(value, timeElapsed);
+    //   const cpmVlaue = cpm || calculateCPM(value, timeElapsed);
   
-      // 결과 모달 표시
-      alert(
-        `타이핑 완료!\nCPM: ${cpmVlaue} \nWPM: ${wpmValue} \n오타 수: ${errorCount}\n오타 기록:\n` +
-          Object.entries(errorCounts)
-            .map(([char, count]) => `${char}: ${count}번`)
-            .join("\n")
-      );
-      resetInput(); // 현재는 반복으로 구현
-    }
+    //   // 결과 모달 표시
+    //   alert(
+    //     `타이핑 완료!\nCPM: ${cpmVlaue} \nWPM: ${wpmValue} \n오타 수: ${errorCount}\n오타 기록:\n` +
+    //       Object.entries(errorCounts)
+    //         .map(([char, count]) => `${char}: ${count}번`)
+    //         .join("\n")
+    //   );
+    //   resetInput(); // 현재는 반복으로 구현
+    // }
+
+// 타이핑 로직 수정
+// 진행도 100% 달성 시
+  if (progressValue === 100) {
+    const timeElapsed = (Date.now() - startTime) / 1000; // 경과 시간 (초)
+    const wpmValue = wpm || calculateWPM(value, timeElapsed);
+    const cpmValue = cpm || calculateCPM(value, timeElapsed);
+
+    const resultData = {
+      time: timeElapsed,
+      wpmValue,
+      cpmValue,
+      errorCount,
+      errorCounts,
+      keywords: [
+        { keyword: "speed", description: "Typing speed analysis" },
+        { keyword: "accuracy", description: "Error and accuracy insights" },
+        { keyword: "focus", description: "Focus and consistency evaluation" },
+      ],      
+      isKorean: true, // 한글 상태
+    };
+
+    navigate('/result', { state: resultData }); // /result로 이동하며 데이터 전달
+    resetInput(); // 타이핑 입력 초기화
+  }     
+
+
   };
 
   // 상태를 주기적으로 업데이트
