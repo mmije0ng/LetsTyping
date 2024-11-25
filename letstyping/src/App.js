@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import logo from './logo.svg';
 import GlobalStyle from './styles/globalstyles';
 import RootLayout from './layouts/root-layout';
@@ -6,6 +7,8 @@ import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 import Ranking from './pages/Ranking';
 import Home from './pages/home';
 import Typing from './pages/typing';
+import TypingResult from './pages/TypingResult'; // TypingResult 컴포넌트
+import TypingCalculate from './components/result/TypingCalculate';
 
 const theme = extendTheme();
 
