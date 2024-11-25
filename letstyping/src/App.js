@@ -3,9 +3,12 @@ import GlobalStyle from './styles/globalstyles';
 import RootLayout from './layouts/root-layout';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
-import Ranking from './pages/Ranking';
-import Home from './pages/home';
-import TypingResult from './pages/TypingResult'; // TypingResult 컴포넌트
+
+import Home from './pages/home'; // 홈
+import Typing from './pages/typing.jsx'; // 타이핑 컴포넌트
+import TypingResult from './pages/TypingResult'; // 타이핑 결과 컴포넌트
+import Ranking from './pages/Ranking'; // 결과 컴포넌트
+
 import TypingCalculate from './components/result/TypingCalculate';
 
 const theme = extendTheme();
@@ -60,7 +63,7 @@ const App = () => {
         },
         {
           path: 'typing',
-          element: <Home />, // 타이핑 컴포넌트 삽입
+          element:<Typing/>, // 타이핑 컴포넌트 삽입
         },
         {
           path: 'result',
@@ -98,12 +101,12 @@ const App = () => {
   ]);
 
   return (
-
     <ChakraProvider theme={theme}>
       <GlobalStyle/>
       <RouterProvider router={router}/>
     </ChakraProvider>
   );
+  
 };
 
 export default App;
