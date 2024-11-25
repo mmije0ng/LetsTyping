@@ -8,7 +8,7 @@ function Typing() {
   const location = useLocation();
   return (
     <>
-     <TypingTxt location={location}/>
+      <TypingTxt location={location}/>
     </>
   );
 }

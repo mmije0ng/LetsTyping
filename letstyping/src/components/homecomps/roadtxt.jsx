@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 import ListItemComponent from "./listitem";
 
 
-const Roadtxt = ({selectedCat}) =>{
+const Roadtxt = ({selectedCat, name}) =>{
     console.log("Selected Cat in Roadtxt:", selectedCat);
     //파일 선택 관련 
     const [data, setData] = useState([]); 
@@ -44,6 +44,7 @@ const Roadtxt = ({selectedCat}) =>{
         if (selectedItem) {
             navigate("/typing", { state: { 
                 content: selectedItem,
+                name,
                 selectedCat,
             } });
         } else {

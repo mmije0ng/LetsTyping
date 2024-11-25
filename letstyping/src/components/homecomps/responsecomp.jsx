@@ -42,7 +42,7 @@ const HomeSecond = ({name}) => {
             </CatContainer>
         </CatWrapp>
         <BoxWrapp>
-                <Roadtxt selectedCat={selectedCat} />
+                <Roadtxt selectedCat={selectedCat} name={name} />
                 <Copytxt selectedCat={selectedCat}/>
         </BoxWrapp>
         

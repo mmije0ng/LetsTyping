@@ -14,8 +14,8 @@ const CustomModal = ({ isOpen, onClose, children, size = "xl", title = "안중�
       <ModalOverlay bg="rgba(0, 0, 0, 0)" />
       <ModalContent
         maxWidth="1100px"
-        width={["90%", "80%", "70%", "955px"]}
-        height="550px"
+        width={["90%", "80%", "70%", "1200px"]}
+        height="650px"
         background="#FFFFFF"
         boxShadow="0 4px 10px rgba(0, 0, 0, 0.15)"
         borderRadius="md"

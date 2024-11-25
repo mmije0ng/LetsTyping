@@ -123,13 +123,15 @@ const TypingTxt = ({location}) => {
             .join("\n")
       );
 
+
       navigate("/result", { state: { 
-        content: `${location.state.content}`,
-        cpm: `${cpmValue}`,
-        time: `${timeElapsed}`,
-        errorCount: `${errorCount}`,
-        errorCounts: `${errorCounts}`,
-       }});
+        content: location.state.content,
+        name: location.state.name,
+        cpm: cpmValue,
+        time: timeElapsed,
+        errorCount: errorCount,
+        errorCounts: errorCounts, 
+      }});      
       
       resetInput(); // 현재는 반복으로 구현
     }
