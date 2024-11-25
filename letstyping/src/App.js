@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import logo from './logo.svg';
 import GlobalStyle from './styles/globalstyles';
 import RootLayout from './layouts/root-layout';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
@@ -8,7 +9,6 @@ import Home from './pages/home'; // 홈
 import Typing from './pages/typing.jsx'; // 타이핑 컴포넌트
 import TypingResult from './pages/TypingResult'; // 타이핑 결과 컴포넌트
 import Ranking from './pages/Ranking'; // 결과 컴포넌트
-
 import TypingCalculate from './components/result/TypingCalculate';
 
 const theme = extendTheme();
