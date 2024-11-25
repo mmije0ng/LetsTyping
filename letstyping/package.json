@@ -20,13 +20,10 @@
     "diff-match-patch": "^1.0.5",
     "framer-motion": "^11.11.15",
     "js-yaml": "^4.1.0",
-<<<<<<< HEAD
+    "framer-motion": "^11.11.17",
     "hangul-js": "^0.2.6",
     "lottie-react": "^2.4.0",
-    
-=======
-    "framer-motion": "^11.11.17",
->>>>>>> mijeong
+
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-icons": "^5.3.0",
