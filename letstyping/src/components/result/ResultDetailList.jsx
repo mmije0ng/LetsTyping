@@ -10,7 +10,7 @@ const ResultDetailList = ({ time, cpm, errorCount }) => {
   const items = [
     { icon: faClock, label: '시간', value: time },
     { icon: faKeyboard, label: '타수', value: cpm },
-    { icon: faEye, label: '오타수', value: errorCount },
+    { icon: faEye, label: '오타 횟수', value: errorCount + "번" },
   ];
 
   return (

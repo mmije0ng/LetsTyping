@@ -7,7 +7,7 @@ import TypingResultCatImage from '../../assets/images/TypingResultCat.svg';
 
 const TypingResultCat = () => (
     <Box display="flex" justifyContent="flex-start" alignItems="center" width="100%">
-        <Image src={TypingResultCatImage} alt="Typing Result Cat" width="500px" maxWidth="100%" />
+        <Image src={TypingResultCatImage} alt="Typing Result Cat" width="410px" maxWidth="100%" />
     </Box>
 );
 
