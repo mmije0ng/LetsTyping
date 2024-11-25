@@ -1,13 +1,25 @@
 import styled from "styled-components";
 import logoimage from "../../assets/images/MainLogo.png"
 import HomeSecond from "./responsecomp";
-import React, {useState} from "react";
+import React, { useState, useEffect, useRef } from "react";
+
 
 
 const HomeComp = () => {
     const [name, setName] = useState(""); //이름 입력 상태 저장 
-  const [showHomeSecond, setShowHomeSecond] = useState(false); //Homesecond 렌더링
+    const [showHomeSecond, setShowHomeSecond] = useState(false); //Homesecond 렌더링
+    const logoRef = useRef(null);
 
+    useEffect(() => {
+        const scrollToLogo = () => {
+            if (logoRef.current) {
+                logoRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+            }
+        };
+
+        // DOM 로드 후 실행
+        setTimeout(scrollToLogo, 0); // 비동기로 실행하여 렌더링 완료 후 동작
+    }, []); // 빈 배열로 설정하여 첫 렌더링 시 한 번만 실행
 
     const handleKeyDown = (event) => {
         if (event.key === "Enter" && name.trim() !== "") {
@@ -21,7 +33,7 @@ const HomeComp = () => {
     }
     return (
         <MainWrapp>
-            <Logo src={logoimage} alt="mainlogo" />
+            <Logo ref={logoRef} src={logoimage} alt="mainlogo" />
             <InputComp 
                 type={'text'} 
                 placeholder="Your name" 
