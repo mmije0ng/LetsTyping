@@ -6,7 +6,8 @@ import { useState, useEffect } from "react";
 import ListItemComponent from "./listitem";
 
 
-const Roadtxt = () =>{
+const Roadtxt = ({selectedCat}) =>{
+    console.log("Selected Cat in Roadtxt:", selectedCat);
     //파일 선택 관련 
     const [data, setData] = useState([]); 
     const [selectedItem, setSelectedItem] = useState(null);
@@ -41,7 +42,10 @@ const Roadtxt = () =>{
     //버튼 클릭해서 다음 페이지로 전달 
     const handleGoButtonClick = () => {
         if (selectedItem) {
-            navigate("/typing", { state: { content: selectedItem } });
+            navigate("/typing", { state: { 
+                content: selectedItem,
+                selectedCat,
+            } });
         } else {
             // 선택된 항목이 없을 경우
             alert("타이핑 할 글을 선택해주세요!");

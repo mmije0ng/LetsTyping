@@ -42,8 +42,8 @@ const HomeSecond = ({name}) => {
             </CatContainer>
         </CatWrapp>
         <BoxWrapp>
-                <Roadtxt />
-                <Copytxt />
+                <Roadtxt selectedCat={selectedCat} />
+                <Copytxt selectedCat={selectedCat}/>
         </BoxWrapp>
         
     </MainWrapp>
@@ -113,7 +113,7 @@ width:100vw;
 margin-top:100px;
 flex-direction:column;
 padding:10px;
-
+transform: scale(0.6);
 `
 
 const Hello = styled.div`

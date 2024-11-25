@@ -76,6 +76,7 @@ line-height: 20px;
 /* identical to box height, or 72% */
 letter-spacing: -0.01em;
 cursor: pointer;
+margin-right:30px;
 
 color: #000000;
 `

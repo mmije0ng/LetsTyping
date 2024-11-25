@@ -58,10 +58,6 @@ const App = () => {
           element: <Home />,
         },
         {
-          path: 'upload',
-          element: <Home />, // 업로드 컴포넌트 삽입
-        },
-        {
           path: 'typing',
           element:<Typing/>, // 타이핑 컴포넌트 삽입
         },

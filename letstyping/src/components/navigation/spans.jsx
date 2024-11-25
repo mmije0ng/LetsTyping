@@ -1,19 +1,21 @@
 import styled from "styled-components";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const Spans = () => {
+    const navigate = useNavigate();
+
     return (
         <>
-            <NavSpan>Home</NavSpan>
-            <NavSpan>Upload</NavSpan>
-            <NavSpan>typing</NavSpan>
-            <NavSpan>result</NavSpan>
-            <NavSpan>ranking</NavSpan>
+            <NavSpan onClick={()=>{navigate("/")}}>Home</NavSpan>
+            <NavSpan onClick={()=>{navigate("/typing")}}>typing</NavSpan>
+            <NavSpan onClick={()=>{navigate("/result")}}>result</NavSpan>
+            <NavSpan onClick={()=>{navigate("/ranking")}}>ranking</NavSpan>
         </>
     )
 }
 
 const NavSpan = styled.span`
-width: 52px;
+width: 100%;
 height: 21px;
 
 margin-right:20px;
