@@ -4,27 +4,44 @@ import GoButton from "./goButton";
 import { useState } from "react";
 
 
-const Copytxt = () =>{
+const Copytxt = ({selectedCat, name}) =>{
     //textarea 값 넘기기
     const [inputValue, setInputValue] = useState("");
     //페이지 이동
     const navigate = useNavigate();
-
+     // 최대 줄 수 제한
+    const MAX_LINES = 5;
     const handleNavigate = () => {
+        //const value = e.target.value;
+
+        // 현재 줄 개수 계산
+        const lineCount = inputValue.split("\n").length;
+
+        // 최대 줄 수를 초과하지 않도록 제한
+        if (lineCount > MAX_LINES) {
+            alert(`최대 ${MAX_LINES}줄까지만 입력 가능합니다.`);
+            return;
+        }
         //입력값 없으면 버튼처리 안함
         if (!inputValue.trim()) { 
             alert("내용을 입력해 주세요!");
             return;
         }
-        navigate("/typing", { state: { inputValue } }); // 상태(state)로 데이터 전달
+        // navigate("/typing", { state: { inputValue, selectedCat } });
+        navigate("/typing", {
+                state: {
+                content: { id: "manual", content: inputValue }, // 전달하는 데이터
+                name,
+                selectedCat,
+                },
+          }); // 상태(state)로 데이터 전달
     };
 
     return (
         <MainWrapp>
             <Headers>
                 <div>
-                    <SPAN>직접 가져올래요 </SPAN> 
-                    <img src="images/WHand.png" alt = "Hand" style={{width:'1.2em'}}/>
+                    <SPAN>직접 가져올래요 ✍️</SPAN> 
                 </div>
                 <GoButton onClick={handleNavigate}/>
             </Headers>

@@ -1,16 +1,21 @@
-// input text 와 output 을 바로 넘길수 있게 만들기 - localStorage?
-
 // 타이핑 효과음 넣기
+// 고양이 아이디, 유저이름, 글 내용.
+// 걸린시간, 타수, 오타수, 키워드, 키워드 설명, 자모음틀린횟수.
 
 import React, { useState, useRef, useEffect } from "react";
 import styled, { keyframes } from "styled-components";
 import Hangul from "hangul-js";
 import TypingProgress from "./typingprogress";
+import { useNavigate } from 'react-router-dom';
 
-const TypingTxt = () => {
-  //const originalText = "대한민국 역사박물관은 안의사의 하얼빈 의거 115주년을 기념해 '안중근 서'라는 제목의 특별전을 내년 3월 31일까지 개최해요.​";
-  //const originalText = "안녕하세요.\n";
-  const originalText = "대한민국 역사박물관은 안의사의\n\n하얼빈 의거 115주년을 기념해\n\n특별전을 내년 3월 31일까지 개최해요.\n" // 끝에 무조건 줄바꿈 넣기
+const TypingTxt = ({location}) => {
+  const content = location?.state?.content || { id: null, content: "" };
+  const name = location?.state?.name || "Unknown User";
+  const selectedCat = location?.state?.selectedCat || "Default Category"; console.log(selectedCat);
+  const sanitizedContent = content.content.endsWith('\n') ? content.content : content.content + '\n'; // text의 맨 마지막에 줄바꿈 추가
+  const originalText = sanitizedContent.replace(/(\s+)\n/g, '\n'); // 줄바꿈 전 공백 제거
+  // const originalText = location?.state?.content?.content || { id: null, content: "" };
+  console.log(location.state.content);
   const [userInput, setUserInput] = useState("");
   const [progress, setProgress] = useState(0);
   const [startTime, setStartTime] = useState(null);
@@ -18,7 +23,9 @@ const TypingTxt = () => {
   const [cpm, setCpm] = useState(0);
   const [errors, setErrors] = useState(0);
   const [errorCounts, setErrorCounts] = useState({});
+  const [nextChar, setNextChar] = useState(""); // 현재 입력해야 할 자소
   const inputRef = useRef(null);
+  const navigate = useNavigate();
 
   // 오타 기록 함수
   const recordError = (wrongChar) => {
@@ -79,15 +86,15 @@ const TypingTxt = () => {
     if (currentIndex < originalChars.length) {
       const userChar = userChars[currentIndex] || "";
       const targetChar = originalChars[currentIndex] || "";
-
+      setNextChar(originalChars[currentIndex+1]);
       if (targetChar === "\n") {
         // 줄바꿈 문자 무시하고 다음 자소로 이동
         if (userChar === "\n") {
           currentIndex++; // 올바른 줄바꿈 입력
         }
       } else if (userChar !== targetChar) {
-        // 현재 자소 오타 기록
-        recordError(targetChar); // 오타 기록
+        // 현재 사용자가 입력한 자소 오타 기록
+        recordError(targetChar); 
       }
     }
 
@@ -102,15 +109,29 @@ const TypingTxt = () => {
     if (progressValue === 100) {
       const timeElapsed = (Date.now() - startTime) / 1000; // 경과 시간 (초)
       const wpmValue = wpm || calculateWPM(value, timeElapsed);
-      const cpmVlaue = cpm || calculateCPM(value, timeElapsed);
+      const cpmValue = cpm || calculateCPM(value, timeElapsed);
   
-      // 결과 모달 표시
+      // 결과 모달 표시---------------------------------------------------------------------
+      // 고양이id,키워드,키워드설명,걸린 시간,타수CPM,errorCount, errorCounts
+
       alert(
-        `타이핑 완료!\nCPM: ${cpmVlaue} \nWPM: ${wpmValue} \n오타 수: ${errorCount}\n오타 기록:\n` +
+        `타이핑 완료!\nCPM: ${cpmValue} \nWPM: ${wpmValue} \n오타 수: ${errorCount}\n오타 기록:\n` +
           Object.entries(errorCounts)
             .map(([char, count]) => `${char}: ${count}번`)
             .join("\n")
       );
+
+
+      navigate("/result", { state: { 
+        content: location.state.content,
+        name: location.state.name,
+        cpm: cpmValue,
+        time: timeElapsed,
+        errorCount: errorCount,
+        errorCounts: errorCounts, 
+        // selectedCat: selectedCat,
+      }});      
+      
       resetInput(); // 현재는 반복으로 구현
     }
   };
@@ -239,10 +260,11 @@ const TypingTxt = () => {
   return (
     <Container>
       {/* 진행도 bar */}
-      <TypingProgress progress={progress} />
+
+      <TypingProgress progress={progress} catId={selectedCat} />
       {/* 현재 status */}
       <Status>
-        <span>지금 입력해야 할 단어 :{}</span>
+        <span>지금 입력해야 할 단어 :{nextChar || "완료!"}</span>
         <span>분당 타수: {cpm} CPM</span>
         <span>분당 단어수(words per Minute): {wpm} WPM</span>
         <span>진행도: {progress.toFixed(1)}%</span>
@@ -273,6 +295,7 @@ const TypingTxt = () => {
             }
           }}
         />
+
       </>
 
     </Container>
@@ -284,7 +307,7 @@ export default TypingTxt;
 const Container = styled.div`
   width: 1000px;
   margin: 20px auto;
-  font-family: Arial, sans-serif;
+  font-family: Montserrat;
 `;
 
 const TextContainer = styled.div`
@@ -313,7 +336,7 @@ const UserInputOverlay = styled.div`
   /* 기본 입력 필드와 동일한 스타일 */
   font-size: 20px;
   line-height: 1.6;
-  font-family: Arial, sans-serif;
+  font-family: Montserrat;
 
   /* 텍스트 선택 방지 */
   user-select: none;
@@ -381,5 +404,5 @@ const Status = styled.div`
   margin-top: 10px;
   display: flex;
   justify-content: space-between;
-  font-size: 14px;
+  font-size: 16px;
 `;

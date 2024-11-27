@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import RankingModal from "../components/ranking/RankingModal";
 import Quiz from "../components/ranking/Quiz";
-import QuizComp from "../components/ranking/QuizComp";
 
 const Ranking = ({ name = "서연" }) => { // 타이핑제목, 링크주소, 유저이름, 유저점수, 키워드, 키워드 설명 받아와야 함
   const [rankingData, setRankingData] = useState([]);
@@ -16,7 +15,7 @@ const Ranking = ({ name = "서연" }) => { // 타이핑제목, 링크주소, 유
         { name: "미정", score: 542 },
         { name: "희연", score: 360 },
         { name: "경민", score: 278 },
-        { name: "서연", score: 140 },
+        // { name: "서연", score: 140 },
         { name: "지수", score: 102 },
         { name: "규림", score: 68 },
       ];

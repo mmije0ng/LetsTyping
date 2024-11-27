@@ -6,11 +6,11 @@ import { Box } from '@chakra-ui/react';
 import ResultDetail from './ResultDetail';
 import { faClock, faKeyboard, faEye } from '@fortawesome/free-solid-svg-icons';
 
-const ResultDetailList = ({ time, tasks, accuracy }) => {
+const ResultDetailList = ({ time, cpm, errorCount }) => {
   const items = [
     { icon: faClock, label: '시간', value: time },
-    { icon: faKeyboard, label: '타수', value: tasks },
-    { icon: faEye, label: '정확도', value: accuracy },
+    { icon: faKeyboard, label: '타수', value: cpm },
+    { icon: faEye, label: '오타 횟수', value: errorCount + "번" },
   ];
 
   return (

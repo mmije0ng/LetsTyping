@@ -21,9 +21,9 @@ const HomeSecond = ({name}) => {
         
         <>
         <Hello>
-            안녕하세요, <br></br>
-            <span style={{fontWeight:600}}>{name}</span> 님!
-            <img src="/images/HHand.png" style={{width:'1.2em'}}/>
+            안녕하세요, <br/>
+            <span style={{fontWeight:600}}>{name}</span> 님! 👋
+            
         </Hello>
         </>
         
@@ -42,8 +42,8 @@ const HomeSecond = ({name}) => {
             </CatContainer>
         </CatWrapp>
         <BoxWrapp>
-                <Roadtxt />
-                <Copytxt />
+                <Roadtxt selectedCat={selectedCat} name={name} />
+                <Copytxt selectedCat={selectedCat} name = {name}/>
         </BoxWrapp>
         
     </MainWrapp>
@@ -113,11 +113,10 @@ width:100vw;
 margin-top:100px;
 flex-direction:column;
 padding:10px;
-
+transform: scale(0.6);
 `
 
 const Hello = styled.div`
-
 margin-right: auto; 
 margin-left:30px;
 
