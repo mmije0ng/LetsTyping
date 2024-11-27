@@ -129,7 +129,7 @@ const TypingTxt = ({location}) => {
         time: timeElapsed,
         errorCount: errorCount,
         errorCounts: errorCounts, 
-        // selectedCat: selectedCat,
+        selectedCat: selectedCat,
       }});      
       
       resetInput(); // 현재는 반복으로 구현
