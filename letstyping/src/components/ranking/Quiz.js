@@ -44,30 +44,39 @@ const Quiz = ({ keywords }) => {
 
   return (
     <div>
-      {!quizComplete ? (
-        <QuizComp
-          question={questions[currentIndex].question}
-          answer={questions[currentIndex].answer}
-          onNextQuestion={handleNextQuestion}
-          resetState={resetState}
-          onResetState={handleResetState} // 상태 리셋 함수 전달
-        />
-      ) : (
-        <Flex 
-          direction="column" 
-          align="center" 
-          justify="center" 
-        >
+      {keywords.length === 0 ? (
+        // 키워드가 없을 때 표시할 내용
+        <Flex direction="column" align="center" justify="center">
           <Text fontSize="lg" textAlign="center">
-            축하합니다! 모든 문제를 풀었어요.
+            타이핑 후 게임을 할 수 있습니다.
           </Text>
-          <Button colorScheme="teal" onClick={handleRestartQuiz} mt={4}>
-            다시 풀기
-          </Button>
           <Button colorScheme="teal" onClick={handleGoHome} mt={4}>
             홈으로 가기
           </Button>
         </Flex>
+      ) : (
+        // 키워드가 있을 때 퀴즈 진행
+        !quizComplete ? (
+          <QuizComp
+            question={questions[currentIndex].question}
+            answer={questions[currentIndex].answer}
+            onNextQuestion={handleNextQuestion}
+            resetState={resetState}
+            onResetState={handleResetState} // 상태 리셋 함수 전달
+          />
+        ) : (
+          <Flex direction="column" align="center" justify="center">
+            <Text fontSize="lg" textAlign="center">
+              축하합니다! 모든 문제를 풀었어요.
+            </Text>
+            <Button colorScheme="teal" onClick={handleRestartQuiz} mt={4}>
+              다시 풀기
+            </Button>
+            <Button colorScheme="teal" onClick={handleGoHome} mt={4}>
+              홈으로 가기
+            </Button>
+          </Flex>
+        )
       )}
     </div>
   );
