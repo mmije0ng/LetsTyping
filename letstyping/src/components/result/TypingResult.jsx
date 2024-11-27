@@ -53,6 +53,11 @@ const TypingResult = () => {
     
   };
 
+  // 모달 클로스시 홈으로 이동
+  const onClose = () => {
+    navigate('/');
+  }
+
   // 타이핑 결과 키보드 한->영 전환 함수
   const toggleKoreanLayout = () => {
     setIsKorean((prev) => !prev);
@@ -64,7 +69,7 @@ const TypingResult = () => {
   console.log(`점수: ${score}`);
 
   return (
-    <CustomModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} title=""> 
+    <CustomModal isOpen={isModalOpen} onClose={onClose} title=""> 
       <ModalContentContainer>
         {/* 좌측: 타수, 시간, 정확도 정보와 버튼 */}
         <Box display="flex" flexDirection="column" alignItems="flex-start" zIndex="2">
@@ -100,13 +105,16 @@ const TypingResult = () => {
         </Box>
 
         {/* 우측: 키워드 목록 표시 */}
-        <Box flex="1" ml="20px" width="50%">
+        <Box flex="1" ml="20px" width="50%" display="flex" justifyContent="center" alignItems="center">
           {content.keywords?.length > 0 ? (
             <TypingKeywordList keywords={content.keywords} />
           ) : (
-            <p>No keywords available</p> // 키워드가 없을 경우 표시
+            <p style={{ textAlign: 'center', color: '#666', fontSize: '14px', marginTop: '60px' }}>
+              직접 입력시에는 키워드가 제공되지 않습니다.
+            </p> // 키워드가 없을 경우 표시
           )}
-        </Box>
+      </Box>
+
       </ModalContentContainer>
 
       {/* 하단: 가상 키보드 */}
