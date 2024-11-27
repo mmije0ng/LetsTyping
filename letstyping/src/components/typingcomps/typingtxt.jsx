@@ -16,7 +16,12 @@ import { useNavigate } from 'react-router-dom';
 
 const TypingTxt = ({location}) => {
   //const originalText = "대한민국 역사박물관은 안의사의\n\n하얼빈 의거 115주년을 기념해\n\n특별전을 내년 3월 31일까지 개최해요.\n" // 끝에 무조건 줄바꿈 넣기
-  const originalText = location?.state?.content?.content || "";
+  const content = location?.state?.content || { id: null, content: "" };
+  const name = location?.state?.name || "Unknown User";
+  const selectedCat = location?.state?.selectedCat || "Default Category";
+
+  const originalText = content.content;
+  //const originalText = location?.state?.content?.content || { id: null, content: "" };
   console.log(location.state.content);
   const [userInput, setUserInput] = useState("");
   const [progress, setProgress] = useState(0);
@@ -262,7 +267,7 @@ const TypingTxt = ({location}) => {
     <Container>
       {/* 진행도 bar */}
 
-      <TypingProgress progress={progress} catId={location.state.content.id} />
+      <TypingProgress progress={progress} catId={content.id} />
       {/* 현재 status */}
       <Status>
         <span>지금 입력해야 할 단어 :{nextChar || "완료!"}</span>

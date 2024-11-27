@@ -4,7 +4,7 @@ import GoButton from "./goButton";
 import { useState } from "react";
 
 
-const Copytxt = ({selectedCat}) =>{
+const Copytxt = ({selectedCat, name}) =>{
     //textarea 값 넘기기
     const [inputValue, setInputValue] = useState("");
     //페이지 이동
@@ -27,7 +27,14 @@ const Copytxt = ({selectedCat}) =>{
             alert("내용을 입력해 주세요!");
             return;
         }
-        navigate("/typing", { state: { inputValue, selectedCat } }); // 상태(state)로 데이터 전달
+        // navigate("/typing", { state: { inputValue, selectedCat } });
+        navigate("/typing", {
+                state: {
+                content: { id: "manual", content: inputValue }, // 전달하는 데이터
+                name,
+                selectedCat,
+                },
+          }); // 상태(state)로 데이터 전달
     };
 
     return (
