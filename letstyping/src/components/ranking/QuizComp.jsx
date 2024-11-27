@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { Box, Button, VStack, Text } from "@chakra-ui/react";
+import { Button, VStack, Text, Alert, AlertIcon } from "@chakra-ui/react";
 import Hangul from "hangul-js";
 import InputRow from "./InputRow";
 
@@ -9,7 +9,7 @@ const splitToJamo = (text) => {
     return jamo;
   };
 
-const QuizComp = ({ question = "정의를 위해 의로운 일을 함", answer = "의거", onNextQuestion, resetState, onResetState }) => {
+const QuizComp = ({ question, answer, onNextQuestion, resetState, onResetState }) => {
     const jamoAnswer = splitToJamo(answer); // 정답을 자모로 분해
     const [inputValues, setInputValues] = useState(Array(jamoAnswer.length).fill("")); // 입력 값 저장
     const [feedback, setFeedback] = useState([]); // 피드백 (색상 상태)
@@ -17,6 +17,7 @@ const QuizComp = ({ question = "정의를 위해 의로운 일을 함", answer =
     const [showAnswer, setShowAnswer] = useState(false); // 정답 표시 여부
     const [attempts, setAttempts] = useState([]); // 틀린 시도 배열
     const [isCorrect, setIsCorrect] = useState(false); // 정답 여부를 체크
+    const [inputError, setInputError] = useState(""); // 입력 오류 메시지 상태
   
     const inputRefs = useRef([]); // 입력 칸의 참조를 저장
   
@@ -32,6 +33,7 @@ const QuizComp = ({ question = "정의를 위해 의로운 일을 함", answer =
             setShowAnswer(false);
             setAttempts([]);
             setIsCorrect(false);
+            setInputError("");
             onResetState(); // 상태 초기화 후 부모로 리셋 요청
         }
     }, [resetState, onResetState]);
@@ -43,6 +45,14 @@ const QuizComp = ({ question = "정의를 위해 의로운 일을 함", answer =
   
     const handleInputChange = (e, index) => {
       const value = e.target.value;
+
+      // 한글이 아닌 경우 경고 메시지
+      if (!isJamoChar(value)) {
+        setInputError("한글만 입력해주세요.");
+        return;
+      } else {
+          setInputError(""); // 한글 입력하면 오류 메시지 지움
+      }
   
       if (!e.nativeEvent.isComposing) {
         return;
@@ -124,7 +134,15 @@ const QuizComp = ({ question = "정의를 위해 의로운 일을 함", answer =
   
     return (
       <VStack spacing={4}>
-  
+
+        {/* 입력 오류 경고 */}
+        {inputError && (
+          <Alert status="error" maxWidth="600px" width="100%" margin="auto">
+              <AlertIcon />
+                {inputError}
+          </Alert>
+        )}
+
         {/* 문제란 */}
         <Text fontSize="lg" textAlign="center">
           Q. {question}

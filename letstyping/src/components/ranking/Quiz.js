@@ -30,6 +30,13 @@ const Quiz = ({ keywords }) => {
     setResetState(false);
   };
 
+  // 퀴즈 다시 풀기
+  const handleRestartQuiz = () => {
+    setCurrentIndex(0); // 첫 번째 문제로 돌아가기
+    setQuizComplete(false); // 퀴즈 완료 상태 초기화
+    setResetState(false); // 상태 초기화
+  };
+
   // 홈으로 이동
    const handleGoHome = () => {
     navigate("/");
@@ -54,8 +61,11 @@ const Quiz = ({ keywords }) => {
           <Text fontSize="lg" textAlign="center">
             축하합니다! 모든 문제를 풀었어요.
           </Text>
+          <Button colorScheme="teal" onClick={handleRestartQuiz} mt={4}>
+            다시 풀기
+          </Button>
           <Button colorScheme="teal" onClick={handleGoHome} mt={4}>
-            다시 하기
+            홈으로 가기
           </Button>
         </Flex>
       )}
