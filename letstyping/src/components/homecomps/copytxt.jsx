@@ -41,8 +41,7 @@ const Copytxt = ({selectedCat, name}) =>{
         <MainWrapp>
             <Headers>
                 <div>
-                    <SPAN>직접 가져올래요 </SPAN> 
-                    <img src="images/WHand.png" alt = "Hand" style={{width:'1.2em'}}/>
+                    <SPAN>직접 가져올래요 ✍️</SPAN> 
                 </div>
                 <GoButton onClick={handleNavigate}/>
             </Headers>
