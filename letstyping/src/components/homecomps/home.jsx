@@ -8,8 +8,10 @@ import React, { useState, useEffect, useRef } from "react";
 const HomeComp = () => {
     const [name, setName] = useState(""); //이름 입력 상태 저장 
     const [showHomeSecond, setShowHomeSecond] = useState(false); //Homesecond 렌더링
-    const logoRef = useRef(null);
+    const logoRef = useRef(null);//스크롤 참조
+    const homeSecondRef = useRef(null); //스크롤 참조
 
+    //처음에 로고가 있는 화면으로 이동 
     useEffect(() => {
         const scrollToLogo = () => {
             if (logoRef.current) {
@@ -20,6 +22,18 @@ const HomeComp = () => {
         // DOM 로드 후 실행
         setTimeout(scrollToLogo, 0); // 비동기로 실행하여 렌더링 완료 후 동작
     }, []); // 빈 배열로 설정하여 첫 렌더링 시 한 번만 실행
+
+    //이름 입력 후 두번째 컴포넌트로 이동
+    useEffect(() => {
+        if (showHomeSecond && homeSecondRef.current) {
+            // HomeSecond가 렌더링된 후 해당 위치로 스크롤
+            homeSecondRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+
+            setTimeout(() => {
+                window.scrollBy({ top: 520, left: 0, behavior: "smooth" }); 
+            }, 300); // smooth scrolling 완료 후 실행
+        }
+    }, [showHomeSecond]);
 
     const handleKeyDown = (event) => {
         if (event.key === "Enter" && name.trim() !== "") {
@@ -42,10 +56,18 @@ const HomeComp = () => {
                 onKeyDown={handleKeyDown}
                 />
 
-                {showHomeSecond && <HomeSecond name={name} />}
+                {showHomeSecond && 
+                    <HomeSecondWrapper ref={homeSecondRef}>
+                        <HomeSecond name={name} />
+                    </HomeSecondWrapper>}
         </MainWrapp>
     )
 }
+
+const HomeSecondWrapper = styled.div`
+    width: 100%;
+`;
+
 
 const InputComp = styled.input `
 box-sizing: border-box;

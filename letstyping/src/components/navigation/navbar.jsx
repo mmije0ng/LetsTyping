@@ -23,7 +23,7 @@ const Navbar = () => {
             
                 {isMobile? (
                     <>
-                    <GiHamburgerMenu
+                    {/* <GiHamburgerMenu
                         style={{ marginBottom: "15%",marginRight:'20px', cursor: "pointer" }}
                         onClick={() => setShowMenu(!showMenu)} // 토글 동작
                     />
@@ -31,11 +31,11 @@ const Navbar = () => {
                         <MenuContainer>
                             <Spans />
                         </MenuContainer>
-                    )}
+                    )} */}
                 </>
                 ):(
                     <ListWrapp>
-                        <Spans />
+                        {/* <Spans /> */}
                     </ListWrapp>
                 )}
                 
