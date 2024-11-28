@@ -22,6 +22,7 @@ const ModalTitle = ({ title, link }) => {
           borderColor="black"
           color="black"
           _focus={{ boxShadow: "none", borderColor: "black" }}
+          onClick={(e) => e.preventDefault()}
       >
         <FaLink style={{ marginRight: "8px" }} /> Link
       </Button>

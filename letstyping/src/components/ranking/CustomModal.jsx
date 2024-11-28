@@ -10,7 +10,7 @@ import ModalTitle from "./ModalTitle";
 
 const CustomModal = ({ isOpen, onClose, children, size = "xl", title, link = "" }) => {
   return (
-    <Modal isOpen={isOpen} onClose={onClose} size={size} closeOnOverlayClick={false} >
+    <Modal isOpen={isOpen} onClose={onClose} size={size} closeOnOverlayClick={false} motionPreset="slideInBottom" >
       <ModalOverlay bg="rgba(0, 0, 0, 0)" />
       <ModalContent
         maxWidth="1100px"
@@ -22,6 +22,7 @@ const CustomModal = ({ isOpen, onClose, children, size = "xl", title, link = "" 
         marginBottom="10px"
         margin="auto"
         top="10%"
+        transition="all 0.3s ease-out"
       >
         {/* 제목 있을 시에만 렌더링 */}
         {title && <ModalTitle title={title} link={link} />}

@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
+import { Box } from "@chakra-ui/react";
 import RankingModal from "../components/ranking/RankingModal";
 import Quiz from "../components/ranking/Quiz";
+import TopRanking from "../components/ranking/TopRanking";
 
 const Ranking = () => { // 타이핑제목, 링크주소, 유저이름, 유저점수, 키워드, 키워드 설명 받아와야 함
   const location = useLocation();
   const { state } = location; // location.state 구조 분해
   const [rankingData, setRankingData] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(true);
 
   console.log('랭킹페이지에서 받음 : ', state); // { title: ~~, name: ~~, score: ~~, keywords: ~~ }
 
@@ -44,18 +47,58 @@ const Ranking = () => { // 타이핑제목, 링크주소, 유저이름, 유저�
     }
   }, [state]); // state가 변경될 때 실행
 
+  // 모달이 닫히면 Quiz 렌더링
+   const handleModalClose = () => {
+    console.log('모달 닫음');
+    setIsModalOpen(false);
+  };
 
   return (
     <>
-      <Quiz keywords={state?.keywords || []} /> 
-      <RankingModal
-        rankingData={rankingData}
-        title={state?.title || ""}
-        name={state?.name || "YOU"}
-        score={state?.score || 0}
-      />
+      {/* 사용자의 정보가 있을 때 모달을 표시하고, 모달이 닫히면 Quiz 렌더링 */}
+      {state ? (
+        <>
+          {isModalOpen ? (
+            <RankingModal
+              rankingData={rankingData}
+              title={state?.title || ""}
+              name={state?.name || "YOU"}
+              score={state?.score || 0}
+              onClose={handleModalClose} // 모달 닫기 함수 전달
+            />
+          ) : (
+            <Quiz keywords={state?.keywords || []} />
+          )}
+        </>
+      ) : (
+        // 사용자의 정보가 안 오면 TopRanking 렌더링
+        <Box flex="1.5" width={["100%", "50%"]}>
+          <TopRanking rankingData={rankingData.slice(0, 3)} />
+        </Box>
+      )}
     </>
   );
+  
+  // return (
+  //   <>
+  //     {/* 유저 정보 있을 때, 없을 때 구분 */}
+  //     {state ? (
+  //       <>
+  //         <Quiz keywords={state?.keywords || []} />
+  //         <RankingModal
+  //           rankingData={rankingData}
+  //           title={state?.title || ""}
+  //           name={state?.name || "YOU"}
+  //           score={state?.score || 0}
+  //         />
+  //       </>
+  //     ) : (
+  //       <Box flex="1.5" width={["100%", "50%"]}>
+  //         <TopRanking rankingData={rankingData.slice(0, 3)} />
+  //       </Box>
+  //     )}
+  //   </>
+  // );
 };
 
 export default Ranking;

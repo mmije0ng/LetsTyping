@@ -9,15 +9,9 @@ const MyRanking = ({ displayData, myData, myRank }) => {
 
   return (
     <BoxComponent
-      initial={{ backgroundColor: "#E1FEFB" }} 
-      animate={{
-        backgroundColor: myData ? ["#FFFFFF", "#E1FEFB", "#FFFFFF"] : "#FFFFFF",
-      }}
-      transition={{
-        duration: 0.7, // 1초마다 깜빡이기
-        repeat: 1, 
-        repeatType: "loop", // 애니메이션 방향을 반대로
-      }}
+      initial={{ y: -110 }} // 애니메이션 시작 시 y = -100
+      animate={{ y: -2 }} // 애니메이션 끝날 때 y = 0으로 이동
+      transition={{ type: "spring" }} 
 
       bg={"#FFFFFF"}
       boxShadow={myData ? "0 4px 10px rgba(0, 0, 0, 0.4)" : "none"} // 내 랭킹만 그림자
