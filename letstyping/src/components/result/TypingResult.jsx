@@ -29,7 +29,10 @@ const TypingResult = () => {
     name: '', // 유저 이름
     isKorean: true, // 한글, 영어 여부
     selectedCat: 1,
+    isCopy: true,
   };
+
+  console.log(`결과 페이지 직접 가져올래요 여부: ${receivedData.isCopy}`);
 
   const { content, cpm, time, errorCount, errorCounts, name } = receivedData;
   const [isKorean, setIsKorean] = useState(true);
@@ -125,9 +128,12 @@ const TypingResult = () => {
       </Box>
 
       {/* Rank 버튼 */}
-      <Box display="flex" justifyContent="flex-end" mt="20px">
-        <RankButton onClick={goToRankPage} />
-      </Box>
+      {/* 직접 가져올래요 (isCopy가 true일 경우) 화면에 렌더링 되지 않도록 */}
+      {!receivedData.isCopy && (
+        <Box display="flex" justifyContent="flex-end" mt="20px">
+          <RankButton onClick={goToRankPage} />
+        </Box>
+      )}
     </CustomModal>
   );
 };

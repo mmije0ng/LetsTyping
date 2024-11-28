@@ -46,6 +46,7 @@ const Roadtxt = ({selectedCat, name}) =>{
                 content: selectedItem,
                 name,
                 selectedCat,
+                isCopy: false,
             } });
         } else {
             // 선택된 항목이 없을 경우

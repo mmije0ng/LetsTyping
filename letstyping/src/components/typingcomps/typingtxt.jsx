@@ -130,6 +130,7 @@ const TypingTxt = ({location}) => {
         errorCount: errorCount,
         errorCounts: errorCounts, 
         selectedCat: selectedCat,
+        isCopy: location.state.isCopy,
       }});      
       
       resetInput(); // 현재는 반복으로 구현

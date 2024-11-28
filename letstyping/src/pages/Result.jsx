@@ -21,6 +21,7 @@ const Result = () => {
     errorCounts: {},
     isKorean: true,
     selectedCat: 1,
+    isCopy: true,
   };
 
   console.log('Data received:', data);
