@@ -33,6 +33,7 @@ const Copytxt = ({selectedCat, name}) =>{
                 content: { id: "manual", content: inputValue }, // 전달하는 데이터
                 name,
                 selectedCat,
+                isCopy: true,
                 },
           }); // 상태(state)로 데이터 전달
     };

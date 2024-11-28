@@ -11,7 +11,6 @@ const Result = () => {
   // 데이터 수신 (기본값 추가)
   const data = location?.state || {
     content: {
-      id: null,
       title: '',
       keywords: [],
       content: '',
@@ -21,6 +20,8 @@ const Result = () => {
     errorCount: 0,
     errorCounts: {},
     isKorean: true,
+    selectedCat: 1,
+    isCopy: true,
   };
 
   console.log('Data received:', data);
