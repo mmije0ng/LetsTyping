@@ -14,6 +14,13 @@ const Copytxt = ({selectedCat, name}) =>{
     const handleNavigate = () => {
         //const value = e.target.value;
 
+        //고양이 선택 안하면 경고창
+        if (!selectedCat) {
+            alert("고양이를 선택해주세요!");
+            return;
+        }
+    
+
         // 현재 줄 개수 계산
         const lineCount = inputValue.split("\n").length;
 

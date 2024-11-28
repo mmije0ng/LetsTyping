@@ -28,6 +28,7 @@ const HomeSecond = ({name}) => {
         </>
         
         <CatWrapp>
+            {/* //고양이 선택 */}
             <SpanCat>함께 할 고양이를 선택해 주세요</SpanCat>
             <CatContainer>
             {cats.map((cat) => (

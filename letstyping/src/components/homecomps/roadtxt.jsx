@@ -41,6 +41,11 @@ const Roadtxt = ({selectedCat, name}) =>{
 
     //버튼 클릭해서 다음 페이지로 전달 
     const handleGoButtonClick = () => {
+        if (!selectedCat) {
+            alert("고양이를 선택해주세요!");
+            return;
+        }
+    
         if (selectedItem) {
             navigate("/typing", { state: { 
                 content: selectedItem,
