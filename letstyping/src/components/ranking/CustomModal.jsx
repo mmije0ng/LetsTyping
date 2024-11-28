@@ -8,14 +8,14 @@ import {
 } from "@chakra-ui/react";
 import ModalTitle from "./ModalTitle";
 
-const CustomModal = ({ isOpen, onClose, children, size = "xl", title = "안중근이 독립기원하며", link = "" }) => {
+const CustomModal = ({ isOpen, onClose, children, size = "xl", title, link = "" }) => {
   return (
     <Modal isOpen={isOpen} onClose={onClose} size={size} closeOnOverlayClick={false} >
       <ModalOverlay bg="rgba(0, 0, 0, 0)" />
       <ModalContent
         maxWidth="1100px"
         width={["90%", "80%", "70%", "1200px"]}
-        height="650px"
+        height="580px"
         background="#FFFFFF"
         boxShadow="0 4px 10px rgba(0, 0, 0, 0.15)"
         borderRadius="md"
