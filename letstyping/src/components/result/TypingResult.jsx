@@ -18,7 +18,6 @@ const TypingResult = () => {
   // 데이터 수신 (기본값 추가)
   const receivedData = location?.state || {
     content: {
-      id: null, // 고양이 아이디
       title: '', // 제목
       keywords: [], // 키워드 맵 (keyword, description)
       content: '', // 내용
@@ -29,7 +28,11 @@ const TypingResult = () => {
     errorCounts: {}, // 틀린 키, 횟수 맵
     name: '', // 유저 이름
     isKorean: true, // 한글, 영어 여부
+    selectedCat: 1,
+    isCopy: true,
   };
+
+  console.log(`결과 페이지 직접 가져올래요 여부: ${receivedData.isCopy}`);
 
   const { content, cpm, time, errorCount, errorCounts, name } = receivedData;
   const [isKorean, setIsKorean] = useState(true);
@@ -63,13 +66,11 @@ const TypingResult = () => {
     setIsKorean((prev) => !prev);
   };
 
-  const [isModalOpen, setIsModalOpen] = useState(true); // 모다 상태
-
   console.log('타이핑 결과 페이지 받아온 데이터:', receivedData);
   console.log(`점수: ${score}`);
 
   return (
-    <CustomModal isOpen={isModalOpen} onClose={onClose} title=""> 
+    <CustomModal isOpen={true} onClose={onClose} title=""> 
       <ModalContentContainer>
         {/* 좌측: 타수, 시간, 정확도 정보와 버튼 */}
         <Box display="flex" flexDirection="column" alignItems="flex-start" zIndex="2">
@@ -101,7 +102,7 @@ const TypingResult = () => {
 
         {/* 중앙: 고양이 이미지 */}
         <Box position="relative" zIndex="1" ml="-179px" mt="30px">
-          <TypingResultCat id={content.id} />
+          <TypingResultCat id={receivedData.selectedCat} />
         </Box>
 
         {/* 우측: 키워드 목록 표시 */}
@@ -127,9 +128,12 @@ const TypingResult = () => {
       </Box>
 
       {/* Rank 버튼 */}
-      <Box display="flex" justifyContent="flex-end" mt="20px">
-        <RankButton onClick={goToRankPage} />
-      </Box>
+      {/* 직접 가져올래요 (isCopy가 true일 경우) 화면에 렌더링 되지 않도록 */}
+      {!receivedData.isCopy && (
+        <Box display="flex" justifyContent="flex-end" mt="20px">
+          <RankButton onClick={goToRankPage} />
+        </Box>
+      )}
     </CustomModal>
   );
 };
