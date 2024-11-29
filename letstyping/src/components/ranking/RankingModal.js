@@ -4,7 +4,7 @@ import CustomModal from "./CustomModal";
 import TopRanking from "./TopRanking";
 import MyRanking from "./MyRanking";
 
-const RankingModal = ({ rankingData, title, name, score }) => {
+const RankingModal = ({ rankingData, title, name, score, onClose }) => {
   const [isModalOpen, setIsModalOpen] = useState(true);
   const [isTooltipOpen, setIsTooltipOpen] = useState(true);
 
@@ -30,14 +30,13 @@ const RankingModal = ({ rankingData, title, name, score }) => {
 
     <CustomModal
       isOpen={isModalOpen}
-      onClose={() => setIsModalOpen(false)}
+      onClose={onClose}
       title={title}
       link={""}
     >
       <Tooltip
         label=" 창을 닫으면, 재미있는 워들 게임이 있습니다 "
         isOpen={isTooltipOpen} // Tooltip이 열려있도록 설정
-        closeOnMouseLeave={true} // 마우스를 떼면 닫히도록 설정
         hasArrow
         placement="top-end" // 툴팁이 상단이 아닌 하단에 배치되도록 변경
         bg="#696969"
@@ -46,8 +45,10 @@ const RankingModal = ({ rankingData, title, name, score }) => {
           whiteSpace: "pre-wrap",
           padding: "0.3rem", 
           top: "-14rem", 
-          right: "-48rem", 
-          
+          right: "-5em", // base, sm, md
+          "@media (min-width: 48em) and (max-width: 62em)": { right: "-22rem" },  // 샤크라 lg, xl, // 80em 이상 103.25em 이하
+          "@media (min-width: 62em) and (max-width: 103.24em)": { right: "-48rem" },  // 샤크라 xl // 80em 이상 103.25em 이하
+          "@media (min-width: 103.25em)": { right: "-67rem" } // 샤크라 xl,2xl // 103.25em 이상         
         }}
       >
       </Tooltip>

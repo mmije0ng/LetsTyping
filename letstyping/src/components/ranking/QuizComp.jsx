@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Button, VStack, Text, Alert, AlertIcon } from "@chakra-ui/react";
 import Hangul from "hangul-js";
+import { ReactTyped } from "react-typed";
 import InputRow from "./InputRow";
 
 // 한글 자모 분리 함수
@@ -145,7 +146,13 @@ const QuizComp = ({ question, answer, onNextQuestion, resetState, onResetState }
 
         {/* 문제란 */}
         <Text fontSize="lg" textAlign="center">
-          Q. {question}
+          Q.  
+          <ReactTyped
+            strings={[question]} // 입력할 문제를 타이핑할 문자열
+            typeSpeed={85} // 타이핑 속도 (ms)
+            startDelay={500} // 시작 전 대기 시간 (ms)
+            showCursor={true} // 커서 표시
+          />
         </Text>
   
         {/* 틀린 시도들 */}
@@ -179,7 +186,7 @@ const QuizComp = ({ question, answer, onNextQuestion, resetState, onResetState }
   
         {/* 정답 제출 버튼 */}
         {currentAttempt < 3 && !showAnswer && (
-          <Button colorScheme="teal" onClick={checkAnswer}>
+          <Button bg="#9CB9FF" color="white" onClick={checkAnswer}>
             제출
           </Button>
         )}
@@ -187,7 +194,7 @@ const QuizComp = ({ question, answer, onNextQuestion, resetState, onResetState }
         {/* 정답 결과 */}
         {isCorrect && (
           <Text color="blue.500" fontSize="lg">
-            🎉 정답입니다 🎉
+            정답입니다 !
           </Text>
         )}
   
@@ -198,7 +205,7 @@ const QuizComp = ({ question, answer, onNextQuestion, resetState, onResetState }
         )}
 
         {(isCorrect || currentAttempt >= 3) && (
-            <Button colorScheme="teal" onClick={onNextQuestion}>
+            <Button bg="#9CB9FF" color="white" onClick={onNextQuestion}>
               다음 문제
             </Button>
       )}

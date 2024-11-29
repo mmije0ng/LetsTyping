@@ -20,6 +20,7 @@
     "diff-match-patch": "^1.0.5",
     "framer-motion": "^11.11.17",
     "hangul-js": "^0.2.6",
+    "js-confetti": "^0.12.0",
     "js-yaml": "^4.1.0",
     "lottie-react": "^2.4.0",
     "react": "^18.3.1",
@@ -31,6 +32,7 @@
     "react-router-dom": "^6.28.0",
     "react-scripts": "5.0.1",
     "react-simple-keyboard": "^3.8.22",
+    "react-typed": "^2.0.12",
     "serve": "^14.2.4",
     "styled-components": "^6.1.13",
     "web-vitals": "^2.1.4"
