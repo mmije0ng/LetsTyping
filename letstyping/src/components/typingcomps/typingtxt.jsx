@@ -7,6 +7,9 @@ import styled, { keyframes } from "styled-components";
 import Hangul from "hangul-js";
 import TypingProgress from "./typingprogress";
 import { useNavigate } from 'react-router-dom';
+import TS1 from "../../assets/sounds/typingsound1.mp3"
+import TS2 from "../../assets/sounds/typingsound2.mp3"
+let isCooldown = false; // 효과음 쿨타임
 
 const TypingTxt = ({location}) => {
   const content = location?.state?.content || { id: null, content: "" };
@@ -14,16 +17,14 @@ const TypingTxt = ({location}) => {
   const selectedCat = location?.state?.selectedCat || "Default Category"; console.log(selectedCat);
   const sanitizedContent = content.content.endsWith('\n') ? content.content : content.content + '\n'; // text의 맨 마지막에 줄바꿈 추가
   const originalText = sanitizedContent.replace(/(\s+)\n/g, '\n'); // 줄바꿈 전 공백 제거
-  // const originalText = location?.state?.content?.content || { id: null, content: "" };
-  console.log(location.state.content);
   const [userInput, setUserInput] = useState("");
   const [progress, setProgress] = useState(0);
   const [startTime, setStartTime] = useState(null);
   const [wpm, setWpm] = useState(0);
   const [cpm, setCpm] = useState(0);
-  const [errors, setErrors] = useState(0);
-  const [errorCounts, setErrorCounts] = useState({});
-  const [nextChar, setNextChar] = useState(""); // 현재 입력해야 할 자소
+  const [errors, setErrors] = useState(0); // 종료시 오타 수
+  const [errorCounts, setErrorCounts] = useState({}); // 타이핑 중 오타 빈도
+  const [nextChar, setNextChar] = useState(""); // 현재 입력해야 할 자소(자모음)
   const inputRef = useRef(null);
   const navigate = useNavigate();
 
@@ -31,14 +32,14 @@ const TypingTxt = ({location}) => {
   const recordError = (wrongChar) => {
     setErrorCounts((prevCounts) => ({
       ...prevCounts,
-      [wrongChar]: (prevCounts[wrongChar] || 0) + 1, // 기존 값에 +1
+      [wrongChar]: (prevCounts[wrongChar] || 0) + 1,
     }));
   };
 
   // 키보드 입력 이벤트 처리
   const handleKeyDown = (e) => {
     if (inputRef.current) {
-      inputRef.current.focus(); // 키보드 입력 시 항상 input에 포커스
+      inputRef.current.focus();
     }
   };
 
@@ -53,19 +54,29 @@ const TypingTxt = ({location}) => {
   // 입력 이벤트 핸들러
   const handleInputChange = (e) => {
     const value = e.target.value;
+    const nextChar = originalText[userInput.length];
+    
+    // 쿨타임을 적용시킨 타이핑 효과음 적용
+    if (!isCooldown) {
+      const randomAudio = Math.random() < 0.5 ? TS1 : TS2;
+      const audio = new Audio(randomAudio);
+      audio.play();
 
-    const nextChar = originalText[userInput.length]; // 다음에 입력될 글자
+      isCooldown = true;
+      setTimeout(() => {
+        isCooldown = false;
+      }, 40);
+    }
 
     // '\n'을 강제로 입력하려고 할 때, Enter로만 넘어가게 처리
     if (nextChar === "\n" && value.length > userInput.length) {
-      // 입력 제한 (다음 글자가 \n일 경우)
       if (e.nativeEvent.inputType !== "insertLineBreak") {
-        return; // Enter 입력만 허용
+        return;
       }
     }
   
     if (!startTime) {
-      setStartTime(Date.now()); // 타이핑 시작 시간 설정
+      setStartTime(Date.now());
     }
 
     setUserInput(value);
@@ -81,19 +92,17 @@ const TypingTxt = ({location}) => {
     const userChars = Hangul.disassemble(updatedUserInput); // 입력 텍스트 자소 배열
   
     // 비교 대상 자소 인덱스 (현재 입력해야 할 자소)
-    let currentIndex = userChars.length - 1; // 입력된 자소 배열 길이 기준
+    let currentIndex = userChars.length - 1;
 
     if (currentIndex < originalChars.length) {
       const userChar = userChars[currentIndex] || "";
       const targetChar = originalChars[currentIndex] || "";
       setNextChar(originalChars[currentIndex+1]);
       if (targetChar === "\n") {
-        // 줄바꿈 문자 무시하고 다음 자소로 이동
         if (userChar === "\n") {
-          currentIndex++; // 올바른 줄바꿈 입력
+          currentIndex++;
         }
       } else if (userChar !== targetChar) {
-        // 현재 사용자가 입력한 자소 오타 기록
         recordError(targetChar); 
       }
     }
@@ -110,18 +119,17 @@ const TypingTxt = ({location}) => {
       const timeElapsed = (Date.now() - startTime) / 1000; // 경과 시간 (초)
       const wpmValue = wpm || calculateWPM(value, timeElapsed);
       const cpmValue = cpm || calculateCPM(value, timeElapsed);
-  
+      
+      // 타이핑 결과
+      // alert(
+      //   `타이핑 완료!\nCPM: ${cpmValue} \nWPM: ${wpmValue} \n오타 수: ${errorCount}\n오타 기록:\n` +
+      //     Object.entries(errorCounts)
+      //       .map(([char, count]) => `${char}: ${count}번`)
+      //       .join("\n")
+      // );
+
       // 결과 모달 표시---------------------------------------------------------------------
       // 고양이id,키워드,키워드설명,걸린 시간,타수CPM,errorCount, errorCounts
-
-      alert(
-        `타이핑 완료!\nCPM: ${cpmValue} \nWPM: ${wpmValue} \n오타 수: ${errorCount}\n오타 기록:\n` +
-          Object.entries(errorCounts)
-            .map(([char, count]) => `${char}: ${count}번`)
-            .join("\n")
-      );
-
-
       navigate("/result", { state: { 
         content: location.state.content,
         name: location.state.name,
@@ -179,8 +187,8 @@ const TypingTxt = ({location}) => {
 
   // CPM 계산
   const calculateCPM = (typedText, timeElapsed) => {
-    const totalCharacters = Hangul.disassemble(typedText).length; // 총 문자 수
-    return Math.round(totalCharacters / (timeElapsed / 60)); // 분당 문자 수
+    const totalCharacters = Hangul.disassemble(typedText).length;
+    return Math.round(totalCharacters / (timeElapsed / 60));
   };
 
 
@@ -188,15 +196,14 @@ const TypingTxt = ({location}) => {
   const updateSpeed = (typedText) => {
     if (!startTime) return;
 
-    const elapsedMinutes = (Date.now() - startTime) / 1000 / 60; // 경과 시간(분)
-    const totalCharacters = Hangul.disassemble(typedText).length; // 총 문자 수
+    const elapsedMinutes = (Date.now() - startTime) / 1000 / 60;
+    const totalCharacters = Hangul.disassemble(typedText).length;
 
-    const wordsTyped = totalCharacters / 5; // 한글 5타 기준
+    const wordsTyped = totalCharacters / 5;
     setWpm(Math.round(wordsTyped / elapsedMinutes));
 
-    // CPM 계산
-    const cpm = Math.round(totalCharacters / elapsedMinutes); // 분당 문자 수
-    setCpm(cpm); // 상태 업데이트
+    const cpm = Math.round(totalCharacters / elapsedMinutes);
+    setCpm(cpm);
 
   };
 
@@ -261,7 +268,6 @@ const TypingTxt = ({location}) => {
   return (
     <Container>
       {/* 진행도 bar */}
-
       <TypingProgress progress={progress} catId={selectedCat} />
       {/* 현재 status */}
       <Status>
@@ -403,6 +409,7 @@ const InputField = styled.textarea`
 
 const Status = styled.div`
   margin-top: 10px;
+  margin-bottom: 10px;
   display: flex;
   justify-content: space-between;
   font-size: 16px;
