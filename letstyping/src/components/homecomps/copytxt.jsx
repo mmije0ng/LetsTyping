@@ -89,7 +89,7 @@ color: #080808;
 
 
 const Input = styled.textarea `
-width:80%;
+width:100%;
 height:80%;
 border:none;
 font-size: 20px;

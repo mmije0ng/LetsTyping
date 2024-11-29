@@ -2,12 +2,14 @@ import styled from "styled-components";
 import logoimage from "../../assets/images/MainLogo.png"
 import HomeSecond from "./responsecomp";
 import React, { useState, useEffect, useRef } from "react";
-
+import { useNavigate } from "react-router-dom";
+import { useUserContext } from "../../context/username";
 
 
 const HomeComp = () => {
+    const { setUserName } = useUserContext(); // 이름 설정 함수 가져오기
     console.log('Window width:', window.innerWidth);
-console.log('Window height:', window.innerHeight);
+    console.log('Window height:', window.innerHeight);
     const [name, setName] = useState(""); //이름 입력 상태 저장 
     const [showHomeSecond, setShowHomeSecond] = useState(false); //Homesecond 렌더링
     const logoRef = useRef(null);//스크롤 참조
@@ -40,6 +42,7 @@ console.log('Window height:', window.innerHeight);
     const handleKeyDown = (event) => {
         if (event.key === "Enter" && name.trim() !== "") {
         // 엔터를 누르고 입력값이 있을 경우
+        setUserName(name);  //전역상태에 이름 저장해서 내비바에서 호출예정 
         setShowHomeSecond(true);
         }
     };
@@ -47,6 +50,10 @@ console.log('Window height:', window.innerHeight);
     const handleChange =(event) => {
         setName(event.target.value);
     }
+
+
+    
+    
     return (
         <MainWrapp>
             <Logo ref={logoRef} src={logoimage} alt="mainlogo" />

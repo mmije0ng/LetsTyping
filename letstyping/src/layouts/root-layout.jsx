@@ -1,13 +1,17 @@
 import { Outlet } from "react-router-dom";
 import Navbar from "../components/navigation/navbar";
 import styled from "styled-components";
+import { UserProvider } from "../context/username";
 
 const RootLayout = () => {
     return(
-        <LayoutContainer>
+        <UserProvider>
+            <LayoutContainer>
             <Navbar/>
             <Outlet/>
-        </LayoutContainer>
+            </LayoutContainer>
+        </UserProvider>
+        
     )
 }
 
