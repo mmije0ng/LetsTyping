@@ -18,7 +18,7 @@ align-items: center;
 padding: 0px 24px;
 gap: 8px;
 
-width: 77px;
+width: 84px;
 height: 54px;
 border:none;
 

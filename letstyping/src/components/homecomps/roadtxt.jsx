@@ -97,7 +97,9 @@ const Roadtxt = ({selectedCat, name}) =>{
 }
 
 const LanguageButtons = styled.div`
-    
+    display:flex;
+    align-items:center;
+
 `;
 
 const LanguageButton = styled.button`
@@ -121,20 +123,22 @@ const ListContainer = styled.div`
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
     
+    height:595px;
     gap: 25px;
     width: 100%;
     padding: 16px;
-    max-height: calc(100% - 40px); 
+    // max-height: calc(100% - 40px); 
     overflow-y:auto;
 `;
 
 const Headers = styled.article`
-margin-top:50px;
+
 display:flex;
 justify-content: space-between;
-gap:120px;
+gap:160px;
 margin-bottom:20px;
-padding:20px;
+padding:16px;
+margin-top:20px;
 
     align-items: center; /* 요소가 세로로 중앙 정렬 */
     @media (max-width: 400px) {

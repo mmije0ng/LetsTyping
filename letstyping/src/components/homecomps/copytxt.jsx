@@ -66,8 +66,10 @@ const Copytxt = ({selectedCat, name}) =>{
 const Headers = styled.article`
 display:flex;
 justify-content: space-between;
-gap:170px;
+gap:160px;
 margin-bottom:20px;
+margin-top:45px;
+align-items:center;
 
 `
 
@@ -78,6 +80,7 @@ font-weight: 500;
 font-size: 1.8em;
 line-height: 30px;
 width:100%;
+margin-top:50px;
 
 color: #080808;
 
@@ -97,9 +100,9 @@ resize: none;
 const MainWrapp = styled.main `
 display:flex;
 flex-direction:column;
-width:50vw;
+width:56vw;
 min-width:200px;
-max-width: 500px;
+max-width: 600px;
 height: 874px;
 padding:30px;
 

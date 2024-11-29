@@ -6,6 +6,8 @@ import React, { useState, useEffect, useRef } from "react";
 
 
 const HomeComp = () => {
+    console.log('Window width:', window.innerWidth);
+console.log('Window height:', window.innerHeight);
     const [name, setName] = useState(""); //이름 입력 상태 저장 
     const [showHomeSecond, setShowHomeSecond] = useState(false); //Homesecond 렌더링
     const logoRef = useRef(null);//스크롤 참조
