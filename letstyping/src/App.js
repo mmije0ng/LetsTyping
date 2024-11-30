@@ -13,6 +13,8 @@ import Ranking from './pages/Ranking'; // 랭킹 컴포넌트
 const theme = extendTheme();
 
 const App = () => {
+  console.log('Window width:', window.innerWidth);
+console.log('Window height:', window.innerHeight);
   
   const router = createBrowserRouter([
     {

@@ -2,16 +2,31 @@
 
 import React, { useState, useMemo } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { Box, Button } from '@chakra-ui/react';
+import styled from 'styled-components';
+import { Box, Button, Tooltip } from '@chakra-ui/react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faLink, faRedo } from '@fortawesome/free-solid-svg-icons';
 import CustomModal from '../ranking/CustomModal';
 import ResultDetailList from './ResultDetailList';
 import TypingResultCat from './TypingResultCat';
 import TypingKeywordList from './TypingKeywordList';
 import TypingResultKeyboard from './TypingResultKeyboard';
 import RankButton from './RankButton';
-import { ModalContentContainer } from '../../styles/result/typingResultStyles';
+
+// 스타일 정의
+const ModalContentContainer = styled(Box)`
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 20px;
+  width: 100%;
+  height: auto;
+  margin-top: 20px;
+`;
 
 const TypingResult = () => {
+  const [isTooltipOpen] = useState(true);
+
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -21,6 +36,7 @@ const TypingResult = () => {
       title: '', // 제목
       keywords: [], // 키워드 맵 (keyword, description)
       content: '', // 내용
+      link: '',
     },
     cpm: 0, // 타수
     time: 0, // 시간
@@ -33,18 +49,16 @@ const TypingResult = () => {
   };
 
   console.log(`결과 페이지 직접 가져올래요 여부: ${receivedData.isCopy}`);
+  console.log(`link: ${receivedData.content.link}`);
 
-  const { content, cpm, time, errorCount, errorCounts, name } = receivedData;
+  const { content, cpm, time, errorCount, errorCounts, name, selectedCat, isCopy } = receivedData;
   const [isKorean, setIsKorean] = useState(true);
-  // const [isKorean, setIsKorean] = useState(receivedData.isKorean);
 
-  
   // 점수 계산
-  const score = useMemo(() => cpm - (errorCount * 10), [cpm, errorCount]);
+  const score = useMemo(() => cpm - errorCount * 10, [cpm, errorCount]);
 
   // 랭킹 페이지로 이동
   const goToRankPage = () => {
-    
     navigate('/ranking', {
       state: {
         title: content.title,
@@ -53,13 +67,12 @@ const TypingResult = () => {
         keywords: content.keywords,
       },
     });
-    
   };
 
-  // 모달 클로스시 홈으로 이동
+  // 모달 클로스 시 홈으로 이동
   const onClose = () => {
     navigate('/');
-  }
+  };
 
   // 타이핑 결과 키보드 한->영 전환 함수
   const toggleKoreanLayout = () => {
@@ -70,39 +83,43 @@ const TypingResult = () => {
   console.log(`점수: ${score}`);
 
   return (
-    <CustomModal isOpen={true} onClose={onClose} title=""> 
+    <CustomModal isOpen={true} onClose={onClose} title="">
       <ModalContentContainer>
         {/* 좌측: 타수, 시간, 정확도 정보와 버튼 */}
         <Box display="flex" flexDirection="column" alignItems="flex-start" zIndex="2">
           <ResultDetailList time={time} cpm={cpm} errorCount={errorCount} />
-          <Box display="flex" gap="10px" mt="4">
-            
-            {/* link 버튼 */}
+          <Box display="flex" gap="10px" mt="4" > 
             <Button
               colorScheme="blue"
-              onClick={() => alert('Link')}
-              w="60px"
-              h="27.8px"
+              leftIcon={<FontAwesomeIcon icon={faLink} />}
+              onClick={() => {
+                if (!receivedData.isCopy && content.link) { // 외부 링크로 이동
+                  window.open(content.link);
+                } else {
+                  navigate('/'); // 기본 경로로 이동
+                }
+              }}
+              w="69px"
+              h="31.8px"
             >
               Link
             </Button>
-            
-            {/* typing으로 이동하는 retry 버튼 */}
+
             <Button
               colorScheme="gray"
+              leftIcon={<FontAwesomeIcon icon={faRedo} />}
               onClick={() => navigate('/typing', { state: { content } })}
-              w="65px"
-              h="27.8px"
+              w="69px"
+              h="31.8px"
             >
               Retry
             </Button>
-
           </Box>
         </Box>
 
         {/* 중앙: 고양이 이미지 */}
-        <Box position="relative" zIndex="1" ml="-179px" mt="30px">
-          <TypingResultCat id={receivedData.selectedCat} />
+        <Box position="relative" zIndex="1" ml="-192px" mt="30px">
+          <TypingResultCat id={selectedCat} />
         </Box>
 
         {/* 우측: 키워드 목록 표시 */}
@@ -112,10 +129,9 @@ const TypingResult = () => {
           ) : (
             <p style={{ textAlign: 'center', color: '#666', fontSize: '14px', marginTop: '60px' }}>
               직접 입력시에는 키워드가 제공되지 않습니다.
-            </p> // 키워드가 없을 경우 표시
+            </p>
           )}
-      </Box>
-
+        </Box>
       </ModalContentContainer>
 
       {/* 하단: 가상 키보드 */}
@@ -127,11 +143,21 @@ const TypingResult = () => {
         />
       </Box>
 
-      {/* Rank 버튼 */}
-      {/* 직접 가져올래요 (isCopy가 true일 경우) 화면에 렌더링 되지 않도록 */}
-      {!receivedData.isCopy && (
-        <Box display="flex" justifyContent="flex-end" mt="20px">
-          <RankButton onClick={goToRankPage} />
+      {/* Rank 버튼과 Tooltip */}
+      {!isCopy && (
+        <Box display="flex" justifyContent="flex-end" mt="20px" position="relative">
+          <Tooltip
+            label={`${name ? `${name}님의 ` : ''}랭킹을 확인해 보세요!`}
+            isOpen={isTooltipOpen}
+            hasArrow
+            placement="bottom" // 툴팁을 버튼 하단에 배치
+            bg="#696969"
+            color="white"
+          >
+            <Box>
+              <RankButton onClick={goToRankPage} />
+            </Box>
+          </Tooltip>
         </Box>
       )}
     </CustomModal>
