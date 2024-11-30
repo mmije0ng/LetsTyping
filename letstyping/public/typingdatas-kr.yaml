@@ -13,8 +13,86 @@
     헌재는 어떤 법률이 헌법을 어기는지 심사하는 기관이다.
   link: https://kids.ccourt.go.kr/site/kor/ex/bbs/List.do?cbIdx=1097
 
-
 - id: 2
+  title: "순우리말로 날짜를 세는 방법, 알고 있으신가요?"
+  keywords:
+    - keyword: "사흘"
+      description: "3일. 셋째 되는 날을 뜻하는 순우리말"
+    - keyword: "나흘"
+      description: "4일. 넷째 되는 날을 뜻하는 순우리말"
+    - keyword: "글피"
+      description: "모레의 다음날, 즉 오늘을 기준으로 3일 뒤를 뜻하는 순우리말"
+  content: |
+    하루, 이틀, 사흘, 나흘, 닷새, 엿새... 보름, 스무날, 그믐날은 우리말로 날짜를 세는 방식을 말합니다.
+    여러 연령층이 어우러져 일하고 있는 회사에서도, 어른들과 대화할 때에도 도움이 된답니다.
+    하루는 1일, 이틀은 2일, 사흘은 3일, 나흘은 4일, 닷새는 5일, 6일은 엿새, 보름은 15일, 스무날은 20일, 그믐은 달의 마지막 날을 뜻합니다.
+    1일 후는 '내일', '모레'는 내일의 다음날로 2일 후를 의미하며, '글피'는 모레의 다음날로 3일 후를 뜻합니다.
+  link: https://m.post.naver.com/viewer/postView.nhn?volumeNo=28920792&memberNo=511714&vType=VERTICAL
+
+- id: 3
+  title: "3·1 운동"
+  keywords:
+    - keyword: "대한민국임시정부"
+      description: "일본의 침탈을 부정하고 독립운동을 주도하기 위해 설립된 대한민국 망명정부"
+    - keyword: "무단통치"
+      description: "헌병 경찰 제도를 이용해 조선인을 무력으로 억압하고 강압적으로 통치하는 방식"
+    - keyword: "문화통치"
+      description: "식민지 지배를 강화하기 위해 회유적 정책을 내세운 일본의 통치 방식"
+  content: |
+    3.1운동은 1919년 3월 1일을 기해 일어난 거족적인 독립만세운동이다.
+    전국적인 범위에서 각계각층을 망라하여 전개된 3.1운동은 세계의 이목을 집중시켜 한국민에 대한 인식을 새롭게 하였고, 중국 상하이에서의 대한민국임시정부 수립으로 이어졌다.
+    3.1운동을 통해 이민족에 대한 끈질기고 강렬한 독립투쟁정신을 고취하였을 뿐 아니라, 일제의 무단통치방법을 이른바 문화통치로 바꾸게 하였다.
+  link: https://encykorea.aks.ac.kr/Article/E0026772
+
+- id: 4
+  title: "4·19 혁명"
+  keywords:
+    - keyword: "하야"
+      description: "관직이나 정계에서 물러나는 것으로 보통 대통령이 물러날 때 쓰인다."
+    - keyword: "독재"
+      description: "하나 또는 소수에 권력이 독점되어 있는 정치적 상태"
+    - keyword: "대구민주운동"
+      description: "이승만 정권의 부패에 맞서 대구 고등학생들이 주도한 최초의 민주화 운동"
+  content: |
+    1960년 2월 28일 대구민주운동을 시작으로, 이승만 대통령이 하야한 1960년 4월 26일까지 전국 각지에서 벌어진 시위를 말한다.    
+    1950년대 말에 반공 이념과 경찰력이란 물리력에 의존하던 이승만식 독재가 한계를 드러내면서 도시지역과 지식인·학생 등 식자층에서는 민주주의에 대한 갈망이 높아져 갔다. 
+    이승만 정권의 독재, 학원 통제와 3.15 부정선거에 반발하는 학생들의 시위에서 시작되었고,
+    이후 시민들이 합세한 대규모 시위로 확대되었고 끝내 이승만 정권을 무너뜨렸다.
+  link: http://contents.history.go.kr/mobile/kc/view.do?levelId=kc_i500700&code=kc_age_50
+
+- id: 5
+  title: "별 헤는 밤"
+  keywords:
+    - keyword: "윤동주"
+      description: "일제강점기의 시인으로 민족 사랑과 독립을 노래한 작품을 남겼다."
+    - keyword: "게외다"
+      description: "'~할 것이오이다'의 줄임말로 시적 표현에서 사용됨."
+    - keyword: "무성하다"
+      description: "풀이나 나무 따위가 자라 우거져 있는 상태를 의미한다."
+  content: |
+    나는 무엇인지 그리워 이 많은 별빛이 내린 언덕 위에    
+    내 이름자를 써 보고 흙으로 덮어 버리었습니다.    
+    딴은 밤을 새워 우는 벌레는 부끄러운 이름을 슬퍼하는 까닭입니다.
+    그러나 겨울이 지나고 나의 별에도 봄이 오면 무덤 위에 파란 잔디가 피어나듯이 내 이름자 묻힌 언덕 위에도 자랑처럼 풀이 무성할 게외다.
+  link: https://e-gonghun.mpva.go.kr/user/IndepCrusaderDetail.do?goTocode=20003&mngNo=6505
+
+- id: 6
+  title: "마당을 쓸었습니다"
+  keywords:
+    - keyword: "모퉁이"
+      description: "길이 각이 지게 꺾어진 곳."
+    - keyword: "싹트다"
+      description: "이루어지려고 하는 조짐이 처음 나타나다."
+    - keyword: "송이"
+      description: "꽃·눈·열매 등의, 낱낱의 작고 소담한 덩이나 덩어리"
+  content: |
+    마당을 쓸었습니다. 지구 한모퉁이가 깨끗해졌습니다.    
+    꽃 한 송이가 피었습니다. 지구 한모퉁이가 아름다워 졌습니다.
+    마음속에 시 하나 싹텄습니다. 지구 한모퉁이가 밝아졌습니다.    
+    나는 지금 그대를 사랑합니다. 지구 한모퉁이가 더욱 깨끗해지고 아름다워 졌습니다.
+  link: https://www.newscj.com/news/articleView.html?idxno=3189506
+
+- id: 7
   title: "밤편지 - IU"
   keywords:
     - keyword: "밤편지"
@@ -29,3 +107,22 @@
     나 우리의 첫 입맞춤을 떠올려요.
     그럼 언제든 눈을 감고 가장 먼 곳으로 가요.
   link: https://www.melon.com/song/detail.htm?songId=30314784
+
+- id: 8
+  title: "애국가 1절"
+  keywords:
+    - keyword: "대한"
+      description: "고구려, 백제, 신라를 통틀어 삼한이라 불렀으며, 대한은 삼한이 하나로 통일되었다는 의미"
+    - keyword: "삼천리"
+      description: "함경북도 북쪽 끝에서 제주도 남쪽 끝까지 약 3000리가 된다고 하여 우리나라의 땅을 이르는 말."
+    - keyword: "보전"
+      description: "온전하게 보호하여 유지한다."
+  content: |
+    동해물과 백두산이 마르고 닳도록
+    하느님이 보우하사 우리나라만세
+    무궁화 삼천리 화려강산
+    대한사람 대한으로 길이 보전하세
+  link: https://www.mois.go.kr/chd/sub/a05/story/screen.do
+
+
+  
