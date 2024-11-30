@@ -2,10 +2,12 @@
 // 타이핑 결과 - 키워드, 설명 리스트
 
 import React from 'react';
-import { KeywordsWrapper } from '../../styles/result/typingKeywordListStyles'; // 스타일 import
+import styled from 'styled-components';
+import { Box } from '@chakra-ui/react';
 import TypingKeyword from './TypingKeyword';
 
-// 키워드 리스트를 매개변수로 받음
+
+// 키워드 리스트 컴포넌트
 const TypingKeywordList = ({ keywords }) => (
   <KeywordsWrapper>
     {keywords.map((item, index) => (
@@ -14,5 +16,12 @@ const TypingKeywordList = ({ keywords }) => (
   </KeywordsWrapper>
 );
 
-export default TypingKeywordList;
+// 스타일 정의
+const KeywordsWrapper = styled(Box)`
+  font-size: 16px;
+  line-height: 1.8;
+  width: 100%;
+  padding-left: 30px;
+`;
 
+export default TypingKeywordList;
