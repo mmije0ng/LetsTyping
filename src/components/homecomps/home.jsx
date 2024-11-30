@@ -1,12 +1,63 @@
 import styled from "styled-components";
-import logoimage from "../../assets/images/MainLogo.png"
+import backImage from "../../assets/images/Back.png";
 import HomeSecond from "./responsecomp";
 import React, { useState, useEffect, useRef } from "react";
-import { useNavigate } from "react-router-dom";
 import { useUserContext } from "../../context/username";
 
+//로고에 타이핑 애니메이션 구현 
+    const useTypingAnime = (text, frame, flag) => {
+        const [animeFinishFlag, setAnimeFinishFlag] = useState(false);
+        const [typingText, setTypingText] = useState("");
+        const textIndex = useRef(0);
+        const lastTimeStamp = useRef(null);
+    
+        const animationCallback = (timeStamp) => {
+        if (lastTimeStamp.current === null) lastTimeStamp.current = timeStamp;
+    
+        const elapsedTime = timeStamp - lastTimeStamp.current;
+    
+        if (elapsedTime > frame && flag) {
+            lastTimeStamp.current = timeStamp;
+            setTypingText((prev) => {
+            const newText = prev + text[textIndex.current];
+            textIndex.current += 1;
+            if (textIndex.current >= text.length) setAnimeFinishFlag(true);
+            return newText;
+            });
+        }
+    
+        if (textIndex.current < text.length && flag) {
+            requestAnimationFrame(animationCallback);
+        }
+        };
+    
+        useEffect(() => {
+        if (flag) requestAnimationFrame(animationCallback);
+        }, [flag]);
+    
+        return { animeFinishFlag, typingText };
+    };
+    
 
 const HomeComp = () => {
+    const { animeFinishFlag: firstAnimeDone, typingText: firstText } = useTypingAnime(
+        "Let’s typing",
+        90,
+        true
+        );
+        const { animeFinishFlag: secondAnimeDone,typingText: secondText } = useTypingAnime(
+            `the perfect place to improve your typing speed and accuracy.`,
+            30,
+            firstAnimeDone
+        );
+        const { typingText: thirdcondText } = useTypingAnime(
+            `Practice with fun exercises.`,
+            30,
+            secondAnimeDone
+        );
+    
+
+
     const { setUserName } = useUserContext(); // 이름 설정 함수 가져오기
     console.log('Window width:', window.innerWidth);
     console.log('Window height:', window.innerHeight);
@@ -56,7 +107,13 @@ const HomeComp = () => {
     
     return (
         <MainWrapp>
-            <Logo ref={logoRef} src={logoimage} alt="mainlogo" />
+            <LogoWrapper ref={logoRef}>
+                <TextOverlay>{firstText}</TextOverlay>
+                <Subtext>{secondText}</Subtext>
+                <Subtext style={{top:'72%'}}>{thirdcondText}</Subtext>
+                <Logo src={backImage} alt="mainlogo" />
+            </LogoWrapper>
+
             <InputComp 
                 type={'text'} 
                 placeholder="Your name" 
@@ -106,6 +163,35 @@ const Logo = styled.img `
 max-width:1000px;
 width:90%;
 height:auto;
+`
+const LogoWrapper = styled.div`
+    position: relative;
+    display: inline-block;
+    width: 90%;
+    max-width: 1000px;
+`;
+
+const TextOverlay = styled.div`
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 7vw;
+    font-weight: bold;
+    z-index: 1;
+    
+`;
+
+const Subtext=styled.div`
+position: absolute;
+width:100%;
+height:auto;
+    top: 67%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.3vw;
+    z-index: 1;
+    text-align:center;
 `
 
 export default HomeComp;

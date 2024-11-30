@@ -1,13 +1,12 @@
 import styled from "styled-components";
 import { useNavigate, useLocation} from "react-router-dom";
-import { GiHamburgerMenu } from "react-icons/gi";
 import { useMediaQuery } from "react-responsive";
-import Spans from "./spans";
 import React, {useState, useEffect, useRef} from "react";
 import { GiSoundOn } from "react-icons/gi";
 import { GiSoundOff } from "react-icons/gi";
 import { Howl } from "howler"; // howler.js import
 import { useUserContext } from "../../context/username";
+import navimg from "../../assets/images/navimg.png"
 
 const Navbar = () => {
     const { userName } = useUserContext();
@@ -196,7 +195,7 @@ const NavWrapp = styled.nav `
     background:pink;
 
     background: ${({ isSpecialRoute }) =>
-    isSpecialRoute ? "url('/images/navimg.png') no-repeat center / cover" : "white"};
+    isSpecialRoute ? `url(${navimg}) no-repeat center / cover` : "white"};
 `
 
 

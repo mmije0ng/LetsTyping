@@ -2,14 +2,16 @@ import styled from "styled-components";
 import Copytxt from "./copytxt";
 import Roadtxt from "./roadtxt";
 import { useState } from "react";
+import CatY from "../../assets/images/CatY.png"
+import CatB from "../../assets/images/CatB.png"
 
 const HomeSecond = ({name}) => {
     //고양이 선택 여부 관리
     const [selectedCat, setSelectedCat] = useState(null);
 
     const cats = [
-        { id: 1, src: "/images/CatY.png", alt: "Yellow Cat" },
-        { id: 2, src: "/images/CatB.png", alt: "Black Cat" },
+        { id: 1, src:CatY, alt: "Yellow Cat" },
+        { id: 2, src: CatB, alt: "Black Cat" },
     ];
 
     const handleCatClick = (id) => {

@@ -99,7 +99,7 @@ const Roadtxt = ({selectedCat, name}) =>{
 const LanguageButtons = styled.div`
     display:flex;
     align-items:center;
-
+    
 `;
 
 const LanguageButton = styled.button`
@@ -109,7 +109,7 @@ const LanguageButton = styled.button`
     padding: 8px 16px;
     cursor: pointer;
     font-size: 1.2em;
-
+    
     width: 130.5px;
     height: 50px;
     border-radius: 9999px;
@@ -121,7 +121,7 @@ const LanguageButton = styled.button`
 
 const ListContainer = styled.div`
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     
     height:595px;
     gap: 25px;
@@ -139,11 +139,13 @@ gap:160px;
 margin-bottom:20px;
 padding:16px;
 margin-top:20px;
+width:100%;
 
     align-items: center; /* 요소가 세로로 중앙 정렬 */
-    @media (max-width: 400px) {
+    @media (max-width: 450px) {
         gap: 10px; /* 작은 화면에서 간격 줄이기 */
         justify-content: center; /* 요소 중앙 정렬 */
+        flex-wrap: wrap;
         
     }
 `
