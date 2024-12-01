@@ -87,8 +87,8 @@ export default TypingResultKeyboard;
 
 // 스타일 적용
 const StyledKeyboardWrapper = styled.div`
-  // width: 70%;
-  // margin: 0 auto;
+  width: 80%;
+  margin: 0 auto;
   .hg-light-red {
     background-color: #FFD1D1 !important;
   }

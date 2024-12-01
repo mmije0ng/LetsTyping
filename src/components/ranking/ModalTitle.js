@@ -1,5 +1,5 @@
 import React from "react";
-import { ModalHeader, Button, Flex, Text } from "@chakra-ui/react";
+import { Button, Flex, Text } from "@chakra-ui/react";
 import { FaLink } from "react-icons/fa";
 
 //자식 요소를 가로로 배치하며, 요소 간의 간격을 최대한 벌림

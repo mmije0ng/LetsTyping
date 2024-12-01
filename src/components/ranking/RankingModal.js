@@ -17,7 +17,7 @@ const RankingModal = ({ rankingData, title, name, score, onClose }) => {
     (rank) => rank.name === name && rank.score === score
   );
   const myData = sortedRankingData[myIndex];
-  const myRank = myIndex + 1;
+  // const myRank = myIndex + 1;
 
   // 내 랭킹 위아래로 2명씩 가져오기
   const displayedRankings = sortedRankingData.slice(

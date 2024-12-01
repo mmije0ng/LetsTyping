@@ -45,23 +45,23 @@ const Quiz = ({ keywords }) => {
     navigate("/");
   };
 
-  // // 퀴즈 완료 후 축하 애니메이션 실행
-  // useEffect(() => {
-  //   // JSConfetti 인스턴스를 한 번만 생성하여 ref에 저장
-  //   jsConfettiRef.current = new JSConfetti();
-  // }, []); // 한 번만 실행되도록 빈 배열을 의존성으로 설정
+  // 퀴즈 완료 후 축하 애니메이션 실행
+  useEffect(() => {
+    // JSConfetti 인스턴스를 한 번만 생성하여 ref에 저장
+    jsConfettiRef.current = new JSConfetti();
+  }, []); // 한 번만 실행되도록 빈 배열을 의존성으로 설정
 
-  // // 퀴즈 완료 후 축하 애니메이션 실행
-  // useEffect(() => {
-  //   if (quizComplete && jsConfettiRef.current) {
-  //     console.log('컨페티');
-  //     jsConfettiRef.current.addConfetti({
-  //       emojis: ["👍", "🩵", "🤍", "🩷"],
-  //       emojiSize: 50,
-  //       confettiNumber: 20,
-  //     });
-  //   }
-  // }, [quizComplete]); // quizComplete 상태를 의존성으로 설정
+  // 퀴즈 완료 후 축하 애니메이션 실행
+  useEffect(() => {
+    if (quizComplete && jsConfettiRef.current) {
+      console.log('컨페티');
+      jsConfettiRef.current.addConfetti({
+        emojis: ["👍", "🩵", "🤍", "🩷"],
+        emojiSize: 45,
+        confettiNumber: 20,
+      });
+    }
+  }, [quizComplete]); // quizComplete 상태를 의존성으로 설정
 
   return (
     <div>

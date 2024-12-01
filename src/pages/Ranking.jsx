@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { Box } from "@chakra-ui/react";
+import { Flex, Box } from "@chakra-ui/react";
 import RankingModal from "../components/ranking/RankingModal";
 import Quiz from "../components/ranking/Quiz";
 import TopRanking from "../components/ranking/TopRanking";
+import Light from "../components/ranking/light";
+import UserList from "../components/ranking/UserList";
 
 const Ranking = () => { // 타이핑제목, 링크주소, 유저이름, 유저점수, 키워드, 키워드 설명 받아와야 함
   const location = useLocation();
@@ -55,7 +57,7 @@ const Ranking = () => { // 타이핑제목, 링크주소, 유저이름, 유저�
 
   return (
     <>
-      {/* 사용자의 정보가 있을 때 모달을 표시하고, 모달이 닫히면 Quiz 렌더링 */}
+      {/* 사용자의 정보가 있으면, 모달 표시하고 모달 아래에는 Quiz 렌더링 */}
       {state ? (
         <>
           {isModalOpen ? (
@@ -71,34 +73,33 @@ const Ranking = () => { // 타이핑제목, 링크주소, 유저이름, 유저�
           )}
         </>
       ) : (
-        // 사용자의 정보가 안 오면 TopRanking 렌더링
-        <Box flex="1.5" width={["100%", "50%"]}>
-          <TopRanking rankingData={rankingData.slice(0, 3)} />
+
+      // 사용자의 정보가 안 오면 TopRanking 렌더링
+      <Flex
+        direction="row"
+        justify="space-around"    
+      >
+        <Box flex="1" width={["100%", "50%"]}>
+            <Box position="relative" zIndex="1" >
+            <TopRanking rankingData={rankingData.slice(0, 3)} />
+            </Box>
+            <Box
+              position="absolute"
+              top="200"
+              width="50%"
+              zIndex="2"
+            >
+              <Light />
+            </Box>
         </Box>
+
+        <Box flex="1" width={["50%", "20%"]} mr="20px">
+            <UserList users={rankingData} />
+        </Box>
+      </Flex>
       )}
     </>
   );
-  
-  // return (
-  //   <>
-  //     {/* 유저 정보 있을 때, 없을 때 구분 */}
-  //     {state ? (
-  //       <>
-  //         <Quiz keywords={state?.keywords || []} />
-  //         <RankingModal
-  //           rankingData={rankingData}
-  //           title={state?.title || ""}
-  //           name={state?.name || "YOU"}
-  //           score={state?.score || 0}
-  //         />
-  //       </>
-  //     ) : (
-  //       <Box flex="1.5" width={["100%", "50%"]}>
-  //         <TopRanking rankingData={rankingData.slice(0, 3)} />
-  //       </Box>
-  //     )}
-  //   </>
-  // );
 };
 
 export default Ranking;

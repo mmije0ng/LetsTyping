@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { Button, VStack, Text, Alert, AlertIcon } from "@chakra-ui/react";
+import { Button, VStack, Text, Alert, AlertIcon, InfoIcon } from "@chakra-ui/react";
 import Hangul from "hangul-js";
 import { ReactTyped } from "react-typed";
 import InputRow from "./InputRow";
@@ -90,6 +90,7 @@ const QuizComp = ({ question, answer, onNextQuestion, resetState, onResetState }
           return newInputValues;
         });
       }
+      setInputError("");
     };
   
     const checkAnswer = () => {
@@ -112,11 +113,6 @@ const QuizComp = ({ question, answer, onNextQuestion, resetState, onResetState }
       }
     };
   
-    // const handleKeyPress = (e) => {
-    //   if (e.key === "Enter" && inputValues.every((value) => value !== "")) {
-    //     checkAnswer();
-    //   }
-    // };
     const handleKeyPress = (e) => {
       if (e.key === "Enter" && inputValues.every((value) => value !== "")) {
         checkAnswer(); // 정답 체크 
@@ -137,12 +133,17 @@ const QuizComp = ({ question, answer, onNextQuestion, resetState, onResetState }
       <VStack spacing={4}>
 
         {/* 입력 오류 경고 */}
-        {inputError && (
+        {inputError ? (
           <Alert status="error" maxWidth="600px" width="100%" margin="auto">
               <AlertIcon />
                 {inputError}
           </Alert>
-        )}
+        ) : inputValues.every((value) => value === "") ? ( // 빈칸일 때만 info 알림 표시
+          <Alert status="info" maxWidth="600px" width="100%" margin="auto">
+            <AlertIcon />
+            감자 → ㄱ ㅏ ㅁ ㅈ ㅏ
+          </Alert>
+        ) : null}
 
         {/* 문제란 */}
         <Text fontSize="lg" textAlign="center">
