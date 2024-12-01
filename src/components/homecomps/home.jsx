@@ -161,7 +161,7 @@ const MainWrapp = styled.main`
 
 const Logo = styled.img `
 max-width:1000px;
-width:90%;
+width:100%;
 height:auto;
 `
 const LogoWrapper = styled.div`
@@ -179,6 +179,9 @@ const TextOverlay = styled.div`
     font-size: 7vw;
     font-weight: bold;
     z-index: 1;
+    width:100%;
+    text-align:center;
+    margin-bottom:1.2vh;
     
 `;
 
