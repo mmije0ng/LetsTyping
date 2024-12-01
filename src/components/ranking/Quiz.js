@@ -82,6 +82,7 @@ const Quiz = ({ keywords }) => {
             question={questions[currentIndex].question}
             answer={questions[currentIndex].answer}
             onNextQuestion={handleNextQuestion}
+            currentIndex={currentIndex}
             resetState={resetState}
             onResetState={handleResetState} // 상태 리셋 함수 전달
           />

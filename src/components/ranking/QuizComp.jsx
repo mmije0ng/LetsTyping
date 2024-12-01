@@ -10,7 +10,7 @@ const splitToJamo = (text) => {
     return jamo;
   };
 
-const QuizComp = ({ question, answer, onNextQuestion, resetState, onResetState }) => {
+const QuizComp = ({ question, answer, onNextQuestion, currentIndex, resetState, onResetState }) => {
     const jamoAnswer = splitToJamo(answer); // 정답을 자모로 분해
     const [inputValues, setInputValues] = useState(Array(jamoAnswer.length).fill("")); // 입력 값 저장
     const [feedback, setFeedback] = useState([]); // 피드백 (색상 상태)
@@ -138,7 +138,7 @@ const QuizComp = ({ question, answer, onNextQuestion, resetState, onResetState }
               <AlertIcon />
                 {inputError}
           </Alert>
-        ) : inputValues.every((value) => value === "") ? ( // 빈칸일 때만 info 알림 표시
+        ) : inputValues.every((value) => value === "") && currentAttempt < 1 && currentIndex === 0 ? ( // info 알림 표시
           <Alert status="info" maxWidth="600px" width="100%" margin="auto">
             <AlertIcon />
             감자 → ㄱ ㅏ ㅁ ㅈ ㅏ
