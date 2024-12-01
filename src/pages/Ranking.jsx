@@ -66,6 +66,7 @@ const Ranking = () => { // 타이핑제목, 링크주소, 유저이름, 유저�
               title={state?.title || ""}
               name={state?.name || "YOU"}
               score={state?.score || 0}
+              link={state?.link || ""}
               onClose={handleModalClose} // 모달 닫기 함수 전달
             />
           ) : (

@@ -65,6 +65,7 @@ const TypingResult = () => {
         name,
         score,
         keywords: content.keywords,
+        link: content.link
       },
     });
   };

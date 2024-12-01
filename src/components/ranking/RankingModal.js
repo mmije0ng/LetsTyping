@@ -4,7 +4,7 @@ import CustomModal from "./CustomModal";
 import TopRanking from "./TopRanking";
 import MyRanking from "./MyRanking";
 
-const RankingModal = ({ rankingData, title, name, score, onClose }) => {
+const RankingModal = ({ rankingData, title, name, score, link, onClose }) => {
   const [isModalOpen, setIsModalOpen] = useState(true);
   const [isTooltipOpen, setIsTooltipOpen] = useState(true);
 
@@ -32,7 +32,7 @@ const RankingModal = ({ rankingData, title, name, score, onClose }) => {
       isOpen={isModalOpen}
       onClose={onClose}
       title={title}
-      link={""}
+      link={link}
     >
       <Tooltip
         label=" 창을 닫으면, 재미있는 워들 게임이 있습니다 "

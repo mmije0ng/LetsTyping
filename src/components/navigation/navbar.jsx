@@ -85,7 +85,7 @@ const Navbar = () => {
 
 const SoundIcon = styled.div`
     cursor: pointer;
-    font-size: 50px; !important;
+    font-size: 35px; !important;
     color:#3B170B;   
     margin-right: 10px;
     margin-left:30px;
@@ -97,14 +97,13 @@ const UserNameSpan = styled.div`
     gap: 5px; /* 텍스트와 이모티콘 사이 간격 */
     white-space: nowrap; /* 줄바꿈 방지 */
     margin-right: 20px; /* 오른쪽 여백 */
-    font-size: 16px;
-    font-weight: 700;
+    font-size: 14px;
+    font-weight: 600;
     color: black;
 
     span {
-        margin-left: 5px; /* 텍스트와 이모티콘 사이의 간격 */
         font-weight: 500; /* 이모티콘 텍스트의 가중치 조정 */
-        font-size: 13px;
+        font-size: 14px;
     }
 `;
 
@@ -118,8 +117,9 @@ const MenuContainer = styled.div`
     flex-direction: column; /* 세로 정렬 */
     gap: 10px; /* 항목 간 간격 */
 `;
+
 const ListWrapp = styled.div `
-margin-right: 100px;
+margin-right: 160px;
 align-items: center; 
 margin-left: auto; 
 right:0;
@@ -129,7 +129,7 @@ flex-direction:row;
 `
 
 const Logo = styled.span `
-margin-left:240px;
+margin-left:280px;
 width: 157px;
 height: 21px;
 margin-bottom:15%;
@@ -154,7 +154,7 @@ height: 21px;
 font-family: 'Inter';
 font-style: normal;
 font-weight: 400;
-font-size: 13px;
+font-size: 15px;
 line-height: 20px;
 /* identical to box height, or 108% */
 letter-spacing: -0.01em;
