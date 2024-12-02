@@ -16,7 +16,7 @@ const UserList = ({ users }) => {
     };     
 
   return (
-    <Box position="relative" top={-100}  width="100%" height="100%" overflow="visible" pt="20px" >
+    <Box position="relative" top={-100}  width="600px" height="100%" overflow="visible" pt="20px" >
         <motion.div
                 initial={{ opacity: 0 }} // 초기 상태: opacity 0 (투명)
                 animate={{ opacity: 1 }} // 애니메이션 끝: opacity 1 (보이게)
