@@ -5,7 +5,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import styled, { keyframes } from "styled-components";
 import Hangul from "hangul-js";
-import TypingProgress from "./typingprogress";
+import TypingProgress from "./typingprogress.jsx";
 import { useNavigate } from 'react-router-dom';
 import TS1 from "../../assets/sounds/typingsound1.mp3"
 import TS2 from "../../assets/sounds/typingsound2.mp3"
@@ -117,16 +117,8 @@ const TypingTxt = ({location}) => {
     // 진행도 100% 달성 시
     if (progressValue === 100) {
       const timeElapsed = (Date.now() - startTime) / 1000; // 경과 시간 (초)
-      const wpmValue = wpm || calculateWPM(value, timeElapsed);
+      // const wpmValue = wpm || calculateWPM(value, timeElapsed);
       const cpmValue = cpm || calculateCPM(value, timeElapsed);
-      
-      // 타이핑 결과
-      // alert(
-      //   `타이핑 완료!\nCPM: ${cpmValue} \nWPM: ${wpmValue} \n오타 수: ${errorCount}\n오타 기록:\n` +
-      //     Object.entries(errorCounts)
-      //       .map(([char, count]) => `${char}: ${count}번`)
-      //       .join("\n")
-      // );
 
       // 결과 모달 표시---------------------------------------------------------------------
       // 고양이id,키워드,키워드설명,걸린 시간,타수CPM,errorCount, errorCounts
