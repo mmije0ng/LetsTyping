@@ -6,7 +6,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 
 import Home from './pages/home'; // 홈
-import Typing from './pages/typing.jsx'; // 타이핑 컴포넌트
+import Typing from './pages/Typing.jsx'; // 타이핑 컴포넌트
 import Result from './pages/Result.jsx'; // 결과 컴포넌트
 import Ranking from './pages/Ranking'; // 랭킹 컴포넌트
 
