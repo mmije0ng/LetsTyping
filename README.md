@@ -15,16 +15,15 @@
         - 측정 종료 시 걸린 시간, 타수, 오타, 자주 틀리는 키 정보와 타이핑 문장에서 어려운 낱말 키워드와 해석을 제공
     - 랭킹 & 퀴즈
         - 타이핑 완료 후 타수와 오타수를 기반으로 점수를 합산하여 랭킹을 확인
-        - 타이핑 후 제공된 키워드를 퀴즈로 풀어보며 어려운 단어를 복습
-
----
+        - 타이핑 후 제공된 키워드를 퀴즈로 풀어보며 어려운 단어를 복습  
+&nbsp;
 
 ## 실행 환경
 
 - **Node.js 버전**: `20.17.0`
-- **npm 버전**:  `10.8.2`
+- **npm 버전**:  `10.8.2`  
+&nbsp;
 
----
 
 ## 사용 라이브러리
 
@@ -40,9 +39,10 @@
 |  | [framer-motion](https://motion.dev/) | 부드러운 컴포넌트 이동 애니메이션 구현. |
 | **타이핑 효과** | [react-typed](https://www.npmjs.com/package/react-typed) | 실제 타이핑하는 듯한 애니메이션 효과. |
 | **효과** | [JSConfetti](https://www.npmjs.com/package/js-confetti) | 목표 달성 시 컨페티 효과로 사용자에게 성취감을 제공. |
-| **3D 효과** | [three.js](https://threejs.org/) | 조명 효과를 추가해 생동감 있는 UI 연출.  |
+| **3D 효과** | [three.js](https://threejs.org/) | 조명 효과를 추가해 생동감 있는 UI 연출.  |  
 
----
+&nbsp;
+
 
 ## 설치 및 실행 방법
 
@@ -57,8 +57,8 @@ npm install
 ```bash
 npm start
 ```
+&nbsp;
 
----
 
 ## 프로젝트 구조
 
@@ -126,32 +126,32 @@ npm start
   └── index.js          # ReactDOM 렌더링 포인트
 
 ```
+&nbsp;
 
----
 
 ## 홈 화면
 
-![홈화면-이름.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/e211d287-f009-47da-a3db-e95f36bfacc0/4cac33cf-ae67-4cbf-a381-6a74039690c8/%ED%99%88%ED%99%94%EB%A9%B4-%EC%9D%B4%EB%A6%84.png)
+![image](https://github.com/user-attachments/assets/ca9064f6-d7d1-4651-8a09-61e1d51093b9)
 
-![홈화면-고양이.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/e211d287-f009-47da-a3db-e95f36bfacc0/bbac51ab-5fe1-4f9c-a301-529a06d17fc3/4b8e3273-906e-4872-a47e-628998800f8b.png)
+![image](https://github.com/user-attachments/assets/4a70fef9-345c-448b-bd0e-66275174de68)
+&nbsp;
 
 ## 타이핑 화면
 
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/e211d287-f009-47da-a3db-e95f36bfacc0/59f61a6a-d8b8-48fb-ac9d-0c6cd5e8f6df/image.png)
+![image](https://github.com/user-attachments/assets/8b96df60-c083-44a8-a6ed-a9f72e8885a5)
 
 ## 결과 화면
 
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/e211d287-f009-47da-a3db-e95f36bfacc0/f4379d64-ba9c-4125-8c96-5c5568b9df72/image.png)
+![image](https://github.com/user-attachments/assets/72993afc-0b80-4a78-b0bd-1aba3a8366c9)
 
 ## 순위 & 퀴즈
 
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/e211d287-f009-47da-a3db-e95f36bfacc0/919cd4e5-92ec-4873-8216-df1858a3ab9d/image.png)
+![image](https://github.com/user-attachments/assets/804a15ee-64bf-442b-9a5a-8f8245fc675d)
 
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/e211d287-f009-47da-a3db-e95f36bfacc0/94e73a91-da96-4c7b-b2ec-4e8c189591ba/image.png)
+![image](https://github.com/user-attachments/assets/1ac421a2-44f4-45b6-ad60-f47380ea6029)
 
-![퀴즈화면3.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/e211d287-f009-47da-a3db-e95f36bfacc0/96e9ec1d-394c-455f-bda0-03669ccb80e8/%ED%80%B4%EC%A6%88%ED%99%94%EB%A9%B43.png)
+![image](https://github.com/user-attachments/assets/344ec361-35dd-42ec-bd65-19ae970d6104)
 
----
 
 ## 기타
 
