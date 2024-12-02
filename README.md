@@ -33,7 +33,7 @@
 | **UI 컴포넌트** | [Chakra UI](https://www.chakra-ui.com/) | 접근성과 유연성을 갖춘 UI 컴포넌트 제공. |
 | **한글 처리** | [hangul-js](https://www.npmjs.com/package/hangul-js) | 한글 타이핑 모션 구현 및 자소 단위 분리. |
 | **아이콘** | [Font Awesome](https://fontawesome.com/), [React Icons](https://www.npmjs.com/package/react-icons) | 다양한 아이콘 제공으로 시각적 완성도 향상. |
-| **타이핑 인터랙션** | [react-simple-keyboard](https://www.npmjs.com/package/react-simple-keyboard) | 타이핑 결과에서 자주 틀린 키를 가상 키보드로 표시. |
+| **타이핑 인터랙션**  | [react-simple-keyboard](https://www.npmjs.com/package/react-simple-keyboard) | 타이핑 결과에서 자주 틀린 키를 가상 키보드로 표시. |
 | **오디오** | [howler.js](https://howlerjs.com/) | 배경 음악 재생으로 몰입감 향상. |
 | **애니메이션** | [lottie-react](https://www.npmjs.com/package/lottie-react) | progress bar에 고양이 GIF를 추가해 재미를 더함. |
 | **애니메이션** | [framer-motion](https://motion.dev/) | 부드러운 컴포넌트 이동 애니메이션 구현. |
