@@ -27,7 +27,7 @@ const Navbar = () => {
         new Howl({
             src: ["/audio/background.mp3"], // 배경음악 경로
             loop: true, // 반복 재생
-            volume: 0.4, // 초기 볼륨
+            volume: 0.2, // 초기 볼륨
         })
     );
 
