@@ -139,10 +139,12 @@ npm start
 ## 타이핑 화면
 
 ![image](https://github.com/user-attachments/assets/8b96df60-c083-44a8-a6ed-a9f72e8885a5)
+&nbsp;
 
 ## 결과 화면
 
 ![image](https://github.com/user-attachments/assets/72993afc-0b80-4a78-b0bd-1aba3a8366c9)
+&nbsp;
 
 ## 순위 & 퀴즈
 
@@ -151,7 +153,7 @@ npm start
 ![image](https://github.com/user-attachments/assets/1ac421a2-44f4-45b6-ad60-f47380ea6029)
 
 ![image](https://github.com/user-attachments/assets/344ec361-35dd-42ec-bd65-19ae970d6104)
-
+&nbsp;
 
 ## 기타
 
