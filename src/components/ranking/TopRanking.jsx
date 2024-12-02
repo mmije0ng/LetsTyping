@@ -1,6 +1,5 @@
 import React from "react";
 import { HStack, VStack, Box, Text } from "@chakra-ui/react";
-import { motion } from "framer-motion";
 import firstPlaceImage from "../../assets/images/1위.png";
 import secondPlaceImage from "../../assets/images/2위.png";
 import thirdPlaceImage from "../../assets/images/3위.png";

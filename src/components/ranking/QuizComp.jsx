@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { Button, VStack, Text, Alert, AlertIcon, InfoIcon } from "@chakra-ui/react";
+import { Button, VStack, Text, Alert, AlertIcon } from "@chakra-ui/react";
 import Hangul from "hangul-js";
 import { ReactTyped } from "react-typed";
 import InputRow from "./InputRow";
