@@ -5,7 +5,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import styled, { keyframes } from "styled-components";
 import Hangul from "hangul-js";
-import TypingProgress from "./TypingProgress.jsx";
+import TypingProgress from "./typingprogress.jsx";
 import { useNavigate } from 'react-router-dom';
 import TS1 from "../../assets/sounds/typingsound1.mp3"
 import TS2 from "../../assets/sounds/typingsound2.mp3"

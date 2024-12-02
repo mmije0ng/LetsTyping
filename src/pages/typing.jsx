@@ -1,4 +1,4 @@
-import TypingTxt from "../components/typingcomps/TypingTxt";
+import TypingTxt from "../components/typingcomps/typingtxt";
 import { useLocation } from 'react-router-dom';
 // 고양이 선택, 글 선택 불러오기
 
