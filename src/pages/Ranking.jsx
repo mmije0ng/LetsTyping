@@ -4,7 +4,7 @@ import { Flex, Box } from "@chakra-ui/react";
 import RankingModal from "../components/ranking/RankingModal";
 import Quiz from "../components/ranking/Quiz";
 import TopRanking from "../components/ranking/TopRanking";
-import Light from "../components/ranking/light";
+import Light from "../components/ranking/SpotLight";
 import UserList from "../components/ranking/UserList";
 
 const Ranking = () => { // 타이핑제목, 링크주소, 유저이름, 유저점수, 키워드, 키워드 설명 받아와야 함
