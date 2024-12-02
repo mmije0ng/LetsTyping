@@ -36,7 +36,7 @@
 | **타이핑 인터랙션** | [react-simple-keyboard](https://www.npmjs.com/package/react-simple-keyboard) | 타이핑 결과에서 자주 틀린 키를 가상 키보드로 표시. |
 | **오디오** | [howler.js](https://howlerjs.com/) | 배경 음악 재생으로 몰입감 향상. |
 | **애니메이션** | [lottie-react](https://www.npmjs.com/package/lottie-react) | progress bar에 고양이 GIF를 추가해 재미를 더함. |
-|  | [framer-motion](https://motion.dev/) | 부드러운 컴포넌트 이동 애니메이션 구현. |
+| **애니메이션** | [framer-motion](https://motion.dev/) | 부드러운 컴포넌트 이동 애니메이션 구현. |
 | **타이핑 효과** | [react-typed](https://www.npmjs.com/package/react-typed) | 실제 타이핑하는 듯한 애니메이션 효과. |
 | **효과** | [JSConfetti](https://www.npmjs.com/package/js-confetti) | 목표 달성 시 컨페티 효과로 사용자에게 성취감을 제공. |
 | **3D 효과** | [three.js](https://threejs.org/) | 조명 효과를 추가해 생동감 있는 UI 연출.  |  
