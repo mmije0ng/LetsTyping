@@ -153,7 +153,11 @@ npm start
 ![image](https://github.com/user-attachments/assets/1ac421a2-44f4-45b6-ad60-f47380ea6029)
 
 ![image](https://github.com/user-attachments/assets/344ec361-35dd-42ec-bd65-19ae970d6104)
+
+![image](https://github.com/user-attachments/assets/290efbd6-97f3-43f1-acee-51a6531f37b5)
+
 &nbsp;
+
 
 ## 기타
 
