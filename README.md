@@ -1,31 +1,60 @@
 # 타이핑 연습 사이트 Let’s typing  ⌨️
+![image](https://github.com/user-attachments/assets/f9ab3a9c-4dbb-4a39-b794-4e1cbdbbc55b)
+&nbsp;
 
 ## 개요
-
-- **프로젝트 이름**:  **Let’s typing**
-- **설명**: 이 프로젝트는 스마트폰 사용의 증가로 인해 학생들의 컴퓨터 키보드 타이핑 능력이 저하되어 문서 작업에서 어려움을 겪는 문제를 해결하기 위해 개발된 React 기반의 타이핑 연습 웹 사이트입니다. 타이핑 연습을 통해 속도와 정확성을 향상시키는 한편, 타이핑 문장에서 주요 키워드와 설명을 제공하여 학생들의 문해력을 높이고, 학업 및 의사소통 능력을 개선하는 것을 목표로 하고 있습니다.
-- **주요 기능**
-    - **글 목록 & 고양이 선택**
-        - 사이트에서 제공하는 다양한 글(상식, 역사, 문학 등)을 선택해 타이핑 연습 가능
-        - 직접 연습하고 싶은 글이 있다면, 복사하여 타이핑 연습에 활용
-        - 고양이 캐릭터를 선택하여 친근하고 재미있는 학습 환경을 제공
-    - **타이핑 연습 환경**
-        - 제공되는 글을 따라 타이핑 하며 사용자의 타이핑 속도 측정
-        - 사용자의 문해력을 키울 수 있도록 어려운 단어가 포함된 문장 제공
-        - 측정 종료 시 걸린 시간, 타수, 오타, 자주 틀리는 키 정보와 타이핑 문장에서 어려운 낱말 키워드와 해석을 제공
-    - **랭킹 & 퀴즈**
-        - 타이핑 완료 후 타수와 오타수를 기반으로 점수를 합산하여 랭킹을 확인
-        - 타이핑 후 제공된 키워드를 퀴즈로 풀어보며 어려운 단어를 복습  
+![image](https://github.com/user-attachments/assets/3141d2ad-f3d6-4d12-ba1f-024c0362e792)
+**Let's typin**g은 스마트폰 사용의 증가로 인해 학생들의 컴퓨터 키보드 타이핑 능력이 저하되어 문서 작업에서 어려움을 겪는 문제를 해결하기 위해 개발된 **React 기반의 타이핑 연습 웹 사이트**입니다.  
+**타이핑 연습**을 통해 속도와 정확성을 향상시키는 한편, **타이핑 문장에서 주요 키워드와 설명**을 제공하여 학생들의 문해력을 높이고, 이를 **퀴즈**로 연계하여 학생들에게 단어 학습 기회를 제공해 학업 및 의사소통 능력을 개선하는 것을 목표로 하고 있습니다.  
 &nbsp;
 
-## 실행 환경
-
-- **Node.js 버전**: `20.17.0`
-- **npm 버전**:  `10.8.2`  
+## 주요 기능
+![웹프레임워크_7팀_1 (2)](https://github.com/user-attachments/assets/5e86ff49-012f-4873-a863-908215413007)
 &nbsp;
 
+**글 목록 & 고양이 선택**
+  - 사이트에서 제공하는 다양한 글(상식, 역사, 문학 등)을 선택해 타이핑 연습 가능
+  - 직접 연습하고 싶은 글이 있다면, 복사하여 타이핑 연습에 활용
+  - 고양이 캐릭터를 선택하여 친근하고 재미있는 학습 환경을 제공
 
+**타이핑 연습 환경**
+  - 제공되는 글을 따라 타이핑 하며 사용자의 타이핑 속도 측정
+  - 사용자의 문해력을 키울 수 있도록 어려운 단어가 포함된 문장 제공
+  - 측정 종료 시 걸린 시간, 타수, 오타, 자주 틀리는 키 정보와 타이핑 문장에서 어려운 낱말 키워드와 해석을 제공
+
+**랭킹 & 퀴즈**
+  - 타이핑 완료 후 타수와 오타수를 기반으로 점수를 합산하여 랭킹을 확인
+  - 타이핑 후 제공된 키워드를 퀴즈로 풀어보며 어려운 단어를 복습  
+&nbsp;
+
+## 홈 화면
+| ![image](https://github.com/user-attachments/assets/ca9064f6-d7d1-4651-8a09-61e1d51093b9) | ![image](https://github.com/user-attachments/assets/4a70fef9-345c-448b-bd0e-66275174de68) |
+|---|---|
+
+
+&nbsp;
+## 타이핑 화면
+![웹프레임워크_7팀_1 (3)](https://github.com/user-attachments/assets/7e18ff2b-d31f-470d-822d-cf113ee5da57)
+![image](https://github.com/user-attachments/assets/8b96df60-c083-44a8-a6ed-a9f72e8885a5)  
+
+&nbsp;
+## 결과 화면
+![image](https://github.com/user-attachments/assets/a797c489-63af-491e-b845-5bb549dc51d8)
+![image](https://github.com/user-attachments/assets/72993afc-0b80-4a78-b0bd-1aba3a8366c9)
+&nbsp;
+
+## 순위 & 퀴즈
+![image](https://github.com/user-attachments/assets/c9a873e6-50e8-4677-843a-9466e5e47475)
+| ![image](https://github.com/user-attachments/assets/804a15ee-64bf-442b-9a5a-8f8245fc675d) | ![image](https://github.com/user-attachments/assets/1ac421a2-44f4-45b6-ad60-f47380ea6029) |
+|---|---|
+| ![image](https://github.com/user-attachments/assets/344ec361-35dd-42ec-bd65-19ae970d6104) | ![image](https://github.com/user-attachments/assets/290efbd6-97f3-43f1-acee-51a6531f37b5) |
+
+&nbsp;
 ## 사용 라이브러리
+![웹프레임워크_7팀_1 (4)](https://github.com/user-attachments/assets/06c5b251-3c7e-4316-9c5f-c994957b0ccd)
+![image](https://github.com/user-attachments/assets/3bef5509-dc5b-45e0-bdd6-26a3931b45bc)
+![웹프레임워크_7팀_1 (5)](https://github.com/user-attachments/assets/6d1f88a6-2536-4ca2-b763-af04fd419251)
+&nbsp;
 
 | **종류**  | **라이브러리** | **설명** |
 | --- | --- | --- |
@@ -42,27 +71,9 @@
 | **3D 효과** | [three.js](https://threejs.org/) | 조명 효과를 추가해 생동감 있는 UI 연출.  |  
 
 &nbsp;
-
-
-## 설치 및 실행 방법
-
-### 1. 의존성 설치
-
-```bash
-npm install
-```
-
-### 2. 개발 서버 실행
-
-```bash
-npm start
-```
-&nbsp;
-
-
-## 프로젝트 구조
-
-디렉토리 구조 및 주요 파일
+## 디렉토리 구조 및 주요 파일
+| ![image](https://github.com/user-attachments/assets/a3e4ca62-88b7-41c8-91db-985722928457) | ![image](https://github.com/user-attachments/assets/c4ad85b5-af5e-46be-a9ae-802eea3922f8) | ![image](https://github.com/user-attachments/assets/36ec893b-686d-45f5-857d-41af45915c9e) |
+|---|---|---|
 
 ```
 /public
@@ -126,38 +137,30 @@ npm start
   └── index.js          # ReactDOM 렌더링 포인트
 
 ```
-&nbsp;
-
-
-## 홈 화면
-
-![image](https://github.com/user-attachments/assets/ca9064f6-d7d1-4651-8a09-61e1d51093b9)
-
-![image](https://github.com/user-attachments/assets/4a70fef9-345c-448b-bd0e-66275174de68)
-&nbsp;
-
-## 타이핑 화면
-
-![image](https://github.com/user-attachments/assets/8b96df60-c083-44a8-a6ed-a9f72e8885a5)
-&nbsp;
-
-## 결과 화면
-
-![image](https://github.com/user-attachments/assets/72993afc-0b80-4a78-b0bd-1aba3a8366c9)
-&nbsp;
-
-## 순위 & 퀴즈
-
-![image](https://github.com/user-attachments/assets/804a15ee-64bf-442b-9a5a-8f8245fc675d)
-
-![image](https://github.com/user-attachments/assets/1ac421a2-44f4-45b6-ad60-f47380ea6029)
-
-![image](https://github.com/user-attachments/assets/344ec361-35dd-42ec-bd65-19ae970d6104)
-
-![image](https://github.com/user-attachments/assets/290efbd6-97f3-43f1-acee-51a6531f37b5)
 
 &nbsp;
+## 실행 환경 & 개발 환경
+- **Node.js 버전**: `20.17.0`
+- **npm 버전**:  `10.8.2`
 
+![image](https://github.com/user-attachments/assets/abade22c-1acf-4962-a609-60995e84c60b)
+
+&nbsp;
+## 설치 및 실행 방법
+
+### 1. 의존성 설치
+
+```bash
+npm install
+```
+
+### 2. 개발 서버 실행
+
+```bash
+npm start
+```
+
+&nbsp;
 
 ## 기타
 
